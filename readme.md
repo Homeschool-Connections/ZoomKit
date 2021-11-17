@@ -7,7 +7,7 @@ Licensed under MIT.
 See the [Zoom API documentation](https://marketplace.zoom.us/docs/api-reference/zoom-api) for more information.
 
 The goal is to eventually support most, if not all, of Zoom's APIs for easy consumption.
-Currently, only the **Dashboards** section of the Zoom API is implemented.
+Currently, only the **Dashboards** section of the Zoom API is fully implemented.
 
 - [ ] Accounts
 - [ ] Archiving
@@ -18,12 +18,12 @@ Currently, only the **Dashboards** section of the Zoom API is implemented.
 - [ ] Chatbot Messages
 - [ ] Contacts
 - [ ] Cloud Recording
-- [x] Dashboards (**fully implemented**)
-- [ ] Devices
+- [x] Dashboards (**fully implemented in v0.1**)
+- [ ] Devices (partially implemented in v0.2)
 - [ ] Groups
 - [ ] IM Chat
 - [ ] IM Groups
-- [ ] Meetings
+- [ ] Meetings (partially implemented in v0.2)
 - [ ] PAC
 - [ ] Reports
 - [ ] Roles
@@ -111,5 +111,27 @@ class MyClass {
 - `listClientMeetingSatisfaction()` - [List client meeting satisfaction](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/listmeetingsatisfaction)
 - `getPostMeetingFeedback()` - [Get post meeting feedback](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/participantfeedback)
 - `getPostWebinarFeedback()` - [Get post webinar feedback](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/participantwebinarfeedback)
+
+#### `ZoomKitDevices` class
+- `listH323SIPDevices()` - [List H.323/SIP devices](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/devicelist)
+- Not implemented: Create/Update/Delete H.323/SIP Devices
+
+#### `ZoomKitMeetings` class
+- `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings)
+- `getMeeting()` - [Get a meeting](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meeting)
+- `createMeeting()` - [Create a meeting](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate)
+- `updateMeeting()` - [Update a meeting](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingupdate)
+- `deleteMeeting()` - [Delete a meeting](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingdelete)
+- `updateMeetingStatus()` - [Update meeting status](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingstatus)
+- `listMeetingRegistrants()` - [List meeting registrants](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants)
+- `addMeetingRegistrant()` - [Add meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantcreate)
+- `deleteMeetingRegistrant()` - [Delete meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantdelete)
+- `getMeetingRegistrant()` - [Get meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantget)
+
+##### `ZoomKitMeetingsExtras` class
+Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that simplify the use of some of Zoom's more complex APIs.
+- `createInstantMeeting()` - Simplified call of `ZoomKitMeetings::createMeeting()` specific to Instant Meetings
+- `createScheduledMeeting()` - Simplified call of `ZoomKitMeetings::createMeeting()` specific to Scheduled Meetings
+- `endMeeting()` - Simplified call of `ZoomKitMeeting::updateMeetingStatus()` to simply end a meeting.
 
 More to come.

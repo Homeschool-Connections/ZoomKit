@@ -119,8 +119,8 @@ class ZoomAPIWrapper {
         string $path,
         array $queryParams = array(),
         array $pathParams = array(),
-        string $body = ''
-    ): array|bool
+        string|array $body = ''
+    ): array|bool|null
     {
         if (is_array($body)) {
             // Treat an empty array in the body data as if no body data was set

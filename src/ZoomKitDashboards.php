@@ -2,6 +2,7 @@
 
 namespace HSC\ZoomKit;
 use Carbon\Carbon;
+use Exception;
 
 final class ZoomKitDashboards extends ZoomKit {
 
@@ -62,7 +63,7 @@ final class ZoomKitDashboards extends ZoomKit {
         ?Carbon $from = null,
         ?Carbon $to = null,
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
         bool $tracking_fields = false
     ): array|Exception
     {
@@ -143,7 +144,7 @@ final class ZoomKitDashboards extends ZoomKit {
         string $meeting_id,
         string $type = 'live',
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
         bool $registrant_id = false,
     ): array|Exception
     {
@@ -232,7 +233,7 @@ final class ZoomKitDashboards extends ZoomKit {
         string $meeting_id,
         string $type = 'live',
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
@@ -267,7 +268,7 @@ final class ZoomKitDashboards extends ZoomKit {
         string $meeting_id,
         string $type = 'live',
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid meeting type.');
@@ -305,7 +306,7 @@ final class ZoomKitDashboards extends ZoomKit {
         ?Carbon $from = null,
         ?Carbon $to = null,
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if(!$from) $from = Carbon::now()->subDay();
@@ -381,7 +382,7 @@ final class ZoomKitDashboards extends ZoomKit {
         string $webinar_id,
         string $type = 'live',
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
         bool $registrant_id = false,
     ): array|Exception
     {
@@ -471,7 +472,7 @@ final class ZoomKitDashboards extends ZoomKit {
         string $webinar_id,
         string $type = 'live',
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
@@ -506,7 +507,7 @@ final class ZoomKitDashboards extends ZoomKit {
         string $webinar_id,
         string $type = 'live',
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
@@ -539,7 +540,7 @@ final class ZoomKitDashboards extends ZoomKit {
     public static function listZoomRooms(
         int $page_size = 30,
         int $page_number = null,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
@@ -576,7 +577,7 @@ final class ZoomKitDashboards extends ZoomKit {
         ?Carbon $from = null,
         ?Carbon $to = null,
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if(!$from) $from = Carbon::now()->subDay();
@@ -676,7 +677,7 @@ final class ZoomKitDashboards extends ZoomKit {
         ?Carbon $from = null,
         ?Carbon $to = null,
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if(!$from) $from = Carbon::now()->subDay();
@@ -815,7 +816,7 @@ final class ZoomKitDashboards extends ZoomKit {
         ?Carbon $from = null,
         ?Carbon $to = null,
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if(!$from) $from = Carbon::now()->subDay();
@@ -893,7 +894,7 @@ final class ZoomKitDashboards extends ZoomKit {
         ?Carbon $from = null,
         ?Carbon $to = null,
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if(!$from) $from = Carbon::now()->subDay();
@@ -969,7 +970,7 @@ final class ZoomKitDashboards extends ZoomKit {
         string $meeting_id,
         string $type = 'live',
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
@@ -1010,7 +1011,7 @@ final class ZoomKitDashboards extends ZoomKit {
         string $webinar_id,
         string $type = 'live',
         int $page_size = 30,
-        string $next_page_token = null,
+        ?string $next_page_token = null,
     ): array|Exception
     {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
