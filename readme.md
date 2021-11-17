@@ -3,41 +3,6 @@
 Consume Zoom Meeting APIs easily from a Laravel application.
 Licensed under MIT.
 
-### Zoom API Sections
-See the [Zoom API documentation](https://marketplace.zoom.us/docs/api-reference/zoom-api) for more information.
-
-The goal is to eventually support most, if not all, of Zoom's APIs for easy consumption.
-Currently, only the **Dashboards** section of the Zoom API is fully implemented.
-
-- [ ] Accounts
-- [ ] Archiving
-- [ ] Billing
-- [ ] Chat Channels
-- [ ] Chat Channels (Account-level)
-- [ ] Chat Messages
-- [ ] Chatbot Messages
-- [ ] Contacts
-- [ ] Cloud Recording
-- [x] Dashboards (**fully implemented in v0.1**)
-- [ ] Devices (partially implemented in v0.2)
-- [ ] Groups
-- [ ] IM Chat
-- [ ] IM Groups
-- [ ] Meetings (partially implemented in v0.2)
-- [ ] PAC
-- [ ] Reports
-- [ ] Roles
-- [ ] SIP Connected Audio
-- [ ] SIP Phone
-- [ ] Tracking Field
-- [ ] TSP
-- [ ] Users
-- [ ] Webinars
-- [ ] Zoom Rooms
-- [ ] Zoom Rooms Account
-- [ ] Zoom Rooms Location
-- [ ] Zoom Rooms Devices
-
 ### Calling an API
 
 You must have `ZOOM_KEY` and `ZOOM_SECRET` entries in your `.env` file.
@@ -114,7 +79,9 @@ class MyClass {
 
 #### `ZoomKitDevices` class
 - `listH323SIPDevices()` - [List H.323/SIP devices](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/devicelist)
-- Not implemented: Create/Update/Delete H.323/SIP Devices
+- `createH323SIPDevice()` - [Create a H.323/SIP device](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/devicecreate)
+- `updateH323SIPDevice()` - [Update a H.323/SIP device](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/deviceupdate)
+- `deleteH323SIPDevice()` - [Delete a H.323/SIP device](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/devicedelete)
 
 #### `ZoomKitMeetings` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings)
@@ -127,6 +94,27 @@ class MyClass {
 - `addMeetingRegistrant()` - [Add meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantcreate)
 - `deleteMeetingRegistrant()` - [Delete meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantdelete)
 - `getMeetingRegistrant()` - [Get meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantget)
+- `updateRegistrantStatus()` - [Update registrant's status](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantstatus)
+- `getPastMeetingDetails()` - [Get past meeting details](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/pastmeetingdetails)
+- `getPastMeetingParticipants()` - [Get past meeting participants](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/pastmeetingparticipants)
+- `listEndedMeetingInstance()` - [List ended meeting instance](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/pastmeetings)
+- `listMeetingPolls()` - [List meeting polls](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingpolls)
+- `createMeetingPoll()` - [Create a meeting poll](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingpollcreate)
+- `getMeetingPoll()` - [Get a meeting poll](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingpollget)
+- `updateMeetingPoll()` - [Update a meeting poll](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingpollupdate)
+- `deleteMeetingPoll()` - [Delete a meeting poll](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingpolldelete)
+- `listRegistrationQuestions()` - [List registration questions](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantsquestionsget)
+- `updateRegistrationQuestions()` - [Update registration questions](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantquestionupdate)
+- `getMeetingInvitation()` - [Get meeting invitation](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetinginvitation)
+- `updateLiveStream()` - [Update a live stream](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetinglivestreamupdate)
+- `getLiveStreamDetails()` - [Get live stream details](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/getmeetinglivestreamdetails)
+- `updateLiveStreamStatus()` - [Update Live Stream Status](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetinglivestreamstatusupdate)
+- `listPastMeetingPollResults()` - [List past meeting's poll results](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/listpastmeetingpolls)
+- `performBatchRegistration()` - [Perform batch registration](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/addbatchregistrants)
+- `useInMeetingRecordingControl()` - [Use in-Meeting recording control](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/inmeetingrecordingcontrol)
+- `performBatchPollCreation()` - [Perform batch poll creation](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/createbatchpolls)
+- `listMeetingTemplates()` - [List meeting templates](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/listmeetingtemplates)
+- `createMeetingInviteLinks()` - [Create meeting's invite links](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetinginvitelinkscreate)
 
 ##### `ZoomKitMeetingsExtras` class
 Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that simplify the use of some of Zoom's more complex APIs.
@@ -134,4 +122,37 @@ Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that
 - `createScheduledMeeting()` - Simplified call of `ZoomKitMeetings::createMeeting()` specific to Scheduled Meetings
 - `endMeeting()` - Simplified call of `ZoomKitMeeting::updateMeetingStatus()` to simply end a meeting.
 
-More to come.
+### Zoom API Sections
+See the [Zoom API documentation](https://marketplace.zoom.us/docs/api-reference/zoom-api) for more information.
+
+The goal is to eventually support most, if not all, of Zoom's APIs for easy consumption.
+**Currently, only the API sections marked as partially or fully implemented are present.**
+
+- [ ] Accounts
+- [ ] Archiving
+- [ ] Billing
+- [ ] Chat Channels
+- [ ] Chat Channels (Account-level)
+- [ ] Chat Messages
+- [ ] Chatbot Messages
+- [ ] Contacts
+- [ ] Cloud Recording
+- [x] Dashboards (**fully implemented**)
+- [x] Devices (**fully implemented**)
+- [ ] Groups
+- [ ] IM Chat
+- [ ] IM Groups
+- [x] Meetings (**fully implemented**)
+- [ ] PAC
+- [ ] Reports
+- [ ] Roles
+- [ ] SIP Connected Audio
+- [ ] SIP Phone
+- [ ] Tracking Field
+- [ ] TSP
+- [ ] Users
+- [ ] Webinars
+- [ ] Zoom Rooms
+- [ ] Zoom Rooms Account
+- [ ] Zoom Rooms Location
+- [ ] Zoom Rooms Devices

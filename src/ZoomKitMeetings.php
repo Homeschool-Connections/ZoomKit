@@ -182,14 +182,14 @@ final class ZoomKitMeetings extends ZoomKit {
      * Scopes: meeting:read:admin meeting:read
      * Rate Limit Label: Light
      *
-     * @param int $meeting_id The meeting ID. WARNING: This could be greater than 10 digits, requiring saving as an int64/long. Do not store this as an int in your database.
+     * @param string $meeting_id The meeting ID.
      * @param string|null $occurrence_id Meeting Occurrence ID. Provide to view meeting details of a particular occurrence of a recurring meeting.
      * @param bool $show_previous_occurrences Set to true if you would like to view the meeting details of all previous occurrences of a recurring meeting.
      * @return array|Exception
      * @throws Exception
      */
     public static function getMeeting(
-        int $meeting_id,
+        string $meeting_id,
         string $occurrence_id = null,
         bool $show_previous_occurrences = false,
     ): array|Exception
@@ -221,7 +221,7 @@ final class ZoomKitMeetings extends ZoomKit {
      *
      * You can call this API in the cleanest way possible using PHP 8's new named arguments.
      *
-     * @param int $meeting_id ID of the meeting to update.
+     * @param string $meeting_id ID of the meeting to update.
      * @param string|null $occurrence_id Meeting occurrence ID.
      * @param string|null $schedule_for Email address or User ID to schedule the meeting for.
      * @param string|null $topic The meeting's topic.
@@ -239,7 +239,7 @@ final class ZoomKitMeetings extends ZoomKit {
      * @throws Exception
      */
     public static function updateMeeting(
-        int $meeting_id,
+        string $meeting_id,
         ?string $occurrence_id = null,
         ?string $schedule_for = null,
         ?string $topic = null,
@@ -289,7 +289,7 @@ final class ZoomKitMeetings extends ZoomKit {
      * Scopes: meeting:write:admin meeting:write
      * Rate Limit Label: Light
      *
-     * @param int $meeting_id ID of the meeting to update.
+     * @param string $meeting_id ID of the meeting to update.
      * @param string|null $occurrence_id Meeting occurrence ID.
      * @param bool $schedule_for_reminder Notify host and alternative host about meeting cancellation by email. Default true.
      * @param bool $cancel_meeting_reminder Notify registrants about meeting cancellation by email. Default false.
@@ -297,7 +297,7 @@ final class ZoomKitMeetings extends ZoomKit {
      * @throws Exception
      */
     public static function deleteMeeting(
-        int $meeting_id,
+        string $meeting_id,
         ?string $occurrence_id = null,
         bool $schedule_for_reminder = true,
         bool $cancel_meeting_reminder = false,
@@ -322,13 +322,13 @@ final class ZoomKitMeetings extends ZoomKit {
      * Scopes: meeting:write:admin, meeting:write
      * Rate Limit Label: Light
      *
-     * @param int $meeting_id ID of the meeting to update.
+     * @param string $meeting_id ID of the meeting to update.
      * @param string $action Either end (end meeting) or recover (recover a deleted meeting).
      * @return array|Exception
      * @throws Exception
      */
     public static function updateMeetingStatus(
-        int $meeting_id,
+        string $meeting_id,
         string $action,
     ): array|Exception
     {
@@ -356,7 +356,7 @@ final class ZoomKitMeetings extends ZoomKit {
      * Scopes: meeting:read:admin meeting:read
      * Rate Limit Label: Medium
      *
-     * @param int $meeting_id ID of the meeting to update.
+     * @param string $meeting_id ID of the meeting to update.
      * @param string|null $occurrence_id Meeting occurrence ID.
      * @param string $status Registrant status to check: pending, approved (default), or denied.
      * @param int $page_size Number of results per page, min 30, max 300.
@@ -365,7 +365,7 @@ final class ZoomKitMeetings extends ZoomKit {
      * @throws Exception
      */
     public static function listMeetingRegistrants(
-        int $meeting_id,
+        string $meeting_id,
         ?string $occurrence_id = null,
         string $status = 'approved',
         int $page_size = 30,
@@ -401,7 +401,7 @@ final class ZoomKitMeetings extends ZoomKit {
      *
      * WARNING: There are validations on this data required that this API implementation does not attempt to handle.
      *
-     * @param int $meeting_id ID of the meeting to register the registrant for.
+     * @param string $meeting_id ID of the meeting to register the registrant for.
      * @param string $email A valid email address for the registrant.
      * @param string $first_name First name
      * @param array|null $occurrence_ids Meeting occurrence IDs.
@@ -421,12 +421,12 @@ final class ZoomKitMeetings extends ZoomKit {
      * @param string|null $comments Registrants can provide any questions or comments they have in this field
      * @param array|null $custom_questions Custom questions in the form of an array
      * @param string|null $language Language for confirmation emails. Valid options: en-US, de-DE, es-ES, fr-FR, jp-JP, pt-PT, ru-RU, zh-CN, zh-TW, ko-KO, it-IT, vi-VN
-     * @param bool|null $auto_approve No official documentation available on what this does, just that it exists.
+     * @param int|null $auto_approve No official documentation available on what this does, just that it exists. Reverse engineeering suggests 1 requires participants to be manually approved, 0 auto-approves.
      * @return array|Exception
      * @throws Exception
      */
     public static function addMeetingRegistrant(
-        int $meeting_id,
+        string $meeting_id,
         string $email,
         string $first_name,
         ?array $occurrence_ids = null,
@@ -446,7 +446,7 @@ final class ZoomKitMeetings extends ZoomKit {
         ?string $comments = null,
         ?array $custom_questions = null,
         ?string $language = null,
-        ?bool $auto_approve = null,
+        ?int $auto_approve = null,
     ): array|Exception
     {
         $data = [
@@ -490,14 +490,14 @@ final class ZoomKitMeetings extends ZoomKit {
      * Scopes: meeting:write:admin meeting:write
      * Rate Limit Label: Light
      *
-     * @param int $meeting_id ID of the meeting to delete the registrant from.
+     * @param string $meeting_id ID of the meeting to delete the registrant from.
      * @param string $registrant_id ID of the registrant to delete from the meeting.
      * @param string|null $occurrence_id The meeting occurrence ID.
      * @return array|Exception
      * @throws Exception
      */
     public static function deleteMeetingRegistrant(
-        int $meeting_id,
+        string $meeting_id,
         string $registrant_id,
         ?string $occurrence_id = null
     ): array|Exception
@@ -520,13 +520,13 @@ final class ZoomKitMeetings extends ZoomKit {
      * Scopes: meeting:read:admin, meeting:read
      * Rate Limit Label: Light
      *
-     * @param int $meeting_id ID of the meeting to get the registrant from.
+     * @param string $meeting_id ID of the meeting to get the registrant from.
      * @param string $registrant_id ID of the registrant get from the meeting.
      * @return array|Exception
      * @throws Exception
      */
     public static function getMeetingRegistrant(
-        int $meeting_id,
+        string $meeting_id,
         string $registrant_id,
     ): array|Exception
     {
@@ -535,4 +535,631 @@ final class ZoomKitMeetings extends ZoomKit {
             '/meetings/'.$meeting_id.'/registrants/'.$registrant_id,
         );
     }
+
+    /**
+     * PUT /meetings/{meetingId}/registrants/status
+     *
+     * Update a meeting registrant’s status by either approving, cancelling or denying a registrant from joining the meeting.
+     *
+     * Scopes: meeting:write:admin, meeting:write
+     * Rate Limit Label: Medium
+     *
+     * @param string $meeting_id ID of the meeting to delete the registrant from.
+     * @param string $action Either end (end meeting) or recover (recover a deleted meeting).
+     * @param array $registrants List of registrants with name and email to apply action on.
+     * @param string|null $occurrence_id The meeting occurrence ID.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateRegistrantStatus(
+        string $meeting_id,
+        string $action,
+        array $registrants,
+        ?string $occurrence_id = null
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'PUT',
+            '/meetings/'.$meeting_id.'/registrants/status',
+            [
+                'occurrence_id' => $occurrence_id,
+            ],
+            [],
+            [
+                'action' => $action,
+                'registrants' => $registrants,
+            ]
+        );
+    }
+
+    /**
+     * GET /past_meetings/{meetingUUID}
+     *
+     * Use this API to get information about a past meeting.
+     *
+     * Scopes: meeting:read:admin, meeting:read
+     * Rate Limit Label: Light
+     *
+     * @param string $meetingUUID The meeting's universally unique identifier. Each meeting instance generates a new UUID. For example, after a meeting ends, a new UUID is generated for the next instance. If the UUID begins with / or contains a //, you must double-encode the meeting UUID when using the meeting UUID for other calls.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getPastMeetingDetails(
+        string $meetingUUID,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/past_meetings/'.$meetingUUID,
+        );
+    }
+
+    /**
+     * GET /past_meetings/{meetingUUID}/participants
+     *
+     * Retrieve information on participants from a past meeting.
+     *
+     * Scopes: meeting:read:admin, meeting:read
+     * Rate Limit Label: Medium
+     *
+     * @param string $meetingUUID The meeting's universally unique identifier. Each meeting instance generates a new UUID. For example, after a meeting ends, a new UUID is generated for the next instance. If the UUID begins with / or contains a //, you must double-encode the meeting UUID when using the meeting UUID for other calls.
+     * @param int $page_size Number of results per page, min 30, max 300.
+     * @param string|null $next_page_token Provide this token for viewing a different page in the paginated result. Expires after 15 min.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getPastMeetingParticipants(
+        string $meetingUUID,
+        int $page_size = 30,
+        ?string $next_page_token = null,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/past_meetings/'.$meetingUUID.'/participants',
+            [
+                'page_size' => $page_size,
+                'next_page_token' => $next_page_token
+            ]
+        );
+    }
+
+    /**
+     * GET /past_meetings/{meetingId}/instances
+     *
+     * Get a list of ended meeting instances.
+     *
+     * Scopes: meeting:read:admin, meeting:read
+     * Rate Limit Label: Medium
+     *
+     * @param string $meeting_id The meeting ID.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function listEndedMeetingInstance(
+        string $meeting_id,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/past_meetings/'.$meeting_id.'/instances',
+        );
+    }
+
+    /**
+     * GET /meetings/{meetingId}/polls
+     *
+     * Polls allow the meeting host to survey attendees. Use this API to list polls of a meeting.
+     *
+     * Scopes: meeting:read:admin, meeting:read
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param bool $anonymous Whether to query for polls with the anonymous option enabled. Default true.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function listMeetingPolls(
+        string $meeting_id,
+        bool $anonymous = true,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/meetings/'.$meeting_id.'/polls',
+            [
+                'anonymous' => $anonymous,
+            ]
+        );
+    }
+
+    /**
+     * POST /meetings/{meetingId}/polls
+     *
+     * Polls allow the meeting host to survey attendees. Use this API to create a poll for a meeting.
+     *
+     * Scopes: meeting:write:admin, meeting:write
+     * Rate Limit Label: Light
+     *
+     * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param string $title The poll's title, up to 64 characters.
+     * @param int $poll_type The poll's type, 1 for Poll, 2 for Advanced Poll (if enabled), 3 for Quiz (if enabled). Defaults to 1.
+     * @param bool $anonymous Whether to query for polls with the anonymous option enabled. Default false.
+     * @param array $questions Questions for the poll - See Zoom docs for the Question array format.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function createMeetingPoll(
+        string $meeting_id,
+        string $title,
+        array $questions,
+        int $poll_type = 1,
+        bool $anonymous = false,
+    ): array|Exception
+    {
+        if($poll_type !== 1 && $poll_type !== 2 && $poll_type !== 3) throw new Exception ('Not a supported poll type.');
+
+        return ZoomKit::returnResponse(
+            'POST',
+            '/meetings/'.$meeting_id.'/polls',
+            [],
+            [],
+            [
+                'title' => $title,
+                'poll_type' => $poll_type,
+                'anonymous' => $anonymous,
+                'questions' => $questions,
+            ]
+        );
+    }
+
+    /**
+     * GET /meetings/{meetingId}/polls/{pollId}
+     *
+     * Polls allow the meeting host to survey attendees.
+     * Use this API to get information about a specific meeting poll.
+     *
+     * Scopes: meeting:read:admin, meeting:read
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param string $poll_id The poll ID.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getMeetingPoll(
+        string $meeting_id,
+        string $poll_id,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'POST',
+            '/meetings/'.$meeting_id.'/polls/'.$poll_id
+        );
+    }
+
+    /**
+     * PUT /meetings/{meetingId}/polls/{pollId}
+     *
+     * Polls allow the meeting host to survey attendees.
+     * Use this API to update information of a specific meeting poll.
+     *
+     * Scopes: meeting:write:admin, meeting:write
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param string $poll_id The poll ID.
+     * @param string|null $title The poll's title, up to 64 characters.
+     * @param array|null $questions Questions for the poll - See Zoom docs for the Question array format.
+     * @param int|null $poll_type The poll's type, 1 for Poll, 2 for Advanced Poll (if enabled), 3 for Quiz (if enabled). Defaults to 1.
+     * @param bool $anonymous Whether to query for polls with the anonymous option enabled. Default false.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateMeetingPoll(
+        string $meeting_id,
+        string $poll_id,
+        ?string $title = null,
+        ?array $questions = null,
+        ?int $poll_type = null,
+        ?bool $anonymous = null,
+    ): array|Exception
+    {
+        $data = array();
+
+        if($poll_type) {
+            if($poll_type !== 1 && $poll_type !== 2 && $poll_type !== 3) throw new Exception ('Not a supported poll type.');
+        }
+
+        if($title) $data['title'] = $title;
+        if($questions) $data['questions'] = $questions;
+        if($poll_type) $data['poll_type'] = $poll_type;
+        if($anonymous) $data['anonymous'] = $anonymous;
+
+        return ZoomKit::returnResponse(
+            'PUT',
+            '/meetings/'.$meeting_id.'/polls/'.$poll_id,
+            [],
+            [],
+            $data
+        );
+    }
+
+    /**
+     * DELETE /meetings/{meetingId}/polls/{pollId}
+     *
+     * Polls allow the meeting host to survey attendees. Use this API to delete a meeting poll.
+     *
+     * Scopes: meeting:write:admin, meeting:write
+     * Rate Limit Label: Light
+     *
+     * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param string $poll_id The poll ID.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function deleteMeetingPoll(
+        string $meeting_id,
+        string $poll_id,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'DELETE',
+            '/meetings/'.$meeting_id.'/polls/'.$poll_id
+        );
+    }
+
+    /**
+     * GET /meetings/{meetingId}/registrants/questions
+     *
+     * List registration questions that will be displayed to users while registering for a meeting.
+     *
+     * Scopes: meeting:read, meeting:read:admin
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function listRegistrationQuestions(
+        string $meeting_id,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/meetings/'.$meeting_id.'/registrants/questions'
+        );
+    }
+
+    /**
+     * PATCH /meetings/{meetingId}/registrants/questions
+     *
+     * Update registration questions that will be displayed to users while registering for a meeting.
+     *
+     * Scopes: meeting:write, meeting:write:admin
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param array|null $questions Array of registrant questions
+     * @param array|null $custom_questions Array of registrant custom questions
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateRegistrationQuestions(
+        string $meeting_id,
+        ?array $questions = null,
+        ?array $custom_questions = null
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/meetings/'.$meeting_id.'/registrants/questions',
+            [],
+            [],
+            [
+                'questions' => $questions,
+                'custom_questions' => $custom_questions
+            ]
+        );
+    }
+
+    /**
+     * GET /meetings/{meetingId}/invitation
+     *
+     * Retrieve the meeting invite note that was sent for a specific meeting.
+     *
+     * Scopes: meeting:read:admin, meeting:read
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getMeetingInvitation(
+        string $meeting_id
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/meetings/'.$meeting_id.'/invitation'
+        );
+    }
+
+    /**
+     * PATCH /meetings/{meetingId}/livestream
+     *
+     * Use this API to update a meeting’s live stream information.
+     * Zoom allows users to live stream a meeting to a custom platform.
+     *
+     * Scopes: meeting:write:admin, meeting:write
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param string $stream_url Streaming URL (whatever that means Zoom docs!)
+     * @param string $stream_key Stream Name and Key
+     * @param string $page_url The livestream page URL
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateLiveStream(
+        string $meeting_id,
+        string $stream_url,
+        string $stream_key,
+        string $page_url
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/meetings/'.$meeting_id.'/livestream',
+            [],
+            [],
+            [
+                'stream_url' => $stream_url,
+                'stream_key' => $stream_key,
+                'page_url' => $page_url
+            ]
+        );
+    }
+
+    /**
+     * GET /meetings/{meetingId}/livestream
+     *
+     * Zoom allows users to live stream a meeting to a custom platform.
+     * Use this API to get a meeting’s live stream configuration details such as Stream URL, Stream Key and Page URL.
+     *
+     * Scopes: meeting:read:admin, meeting:read
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getLiveStreamDetails(
+        string $meeting_id
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/meetings/'.$meeting_id.'/livestream'
+        );
+    }
+
+    /**
+     * PATCH /meetings/{meetingId}/livestream/status
+     *
+     * Zoom allows users to live stream a meeting to a custom platform.
+     * Use this API to update the status of a meeting’s live stream.
+     *
+     * Scopes: meeting:write:admin, meeting:write
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param string $action Update the status of a live stream. This can be either `start` to start the stream or `stop` to stop an ongoing stream.
+     * @param array $settings Update the settings of a live stream session. The settings can only be updated for a stopped live stream and cannot be updated if the stream is ongoing.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateLiveStreamStatus(
+        string $meeting_id,
+        string $action,
+        array $settings
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/meetings/'.$meeting_id.'/livestream/status',
+            [],
+            [],
+            [
+                'action' => $action,
+                'settings' => $settings
+            ]
+        );
+    }
+
+    /**
+     * GET /past_meetings/{meetingId}/polls
+     *
+     * Polls allow the meeting host to survey attendees.
+     * Use this API to list poll results of a meeting.
+     *
+     * Scopes: meeting:read:admin, meeting:read
+     * Rate Limit Label: Medium
+     *
+     * Meeting must be a scheduled meeting.
+     * Instant meetings do not have polling features enabled.
+     *
+     * @param string $meeting_id The meeting ID.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function listPastMeetingPollResults(
+        string $meeting_id,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/past_meetings/'.$meeting_id.'/polls'
+        );
+    }
+
+    /**
+     * POST /meetings/{meetingId}/batch_registrants
+     *
+     * Register up to 30 registrants at once for a meeting that requires registration.
+     * The meeting must require registration and should be of type 2, i.e., they should be scheduled meetings.
+     * Instant meetings and Recurring meetings are not supported by this API.
+     *
+     * Scope: meeting:write, meeting:write:admin
+     * Rate Limit Label: Heavy
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param int $auto_approve If a meeting was scheduled with approval_type 1 (manual approval), but you would like to automatically approve the registrants added by this API, set this to true. You cannot use this field to change the approval setting for a meeting that was originally scheduled with approval_type 0 (automatic).
+     * @param array $registrants Array of registrants to batch-register. Can contain first_name, last_name, and email. Only email is marked as required.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function performBatchRegistration(
+        string $meeting_id,
+        int $auto_approve,
+        array $registrants,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'POST',
+            '/meetings/'.$meeting_id.'/batch_registrants',
+            [],
+            [],
+            [
+                'auto_approve' => $auto_approve,
+                'registrants' => $registrants
+            ]
+        );
+    }
+
+    /**
+     * PATCH /live_meetings/{meetingId}/events
+     *
+     * Use this API to control the in-meeting recording features such as starting a recording, stopping a recording, pausing a recording, and resuming a recording.
+     * This API only works for Cloud Recordings and not for local recordings.
+     *
+     * The meeting must be a live meeting.
+     * Cloud Recording must be enabled.
+     * The user using this API must either be the host or alternative host of the meeting.
+     *
+     * Scopes: meeting:write, meeting:write:admin, meeting:master
+     * Rate Limit Label: Undefined (missing from Zoom Docs)
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param string $method The method that you would like to control. You can use `recording.start`, `recording.stop`, `recording.pause`, and `recording.resume`.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function useInMeetingRecordingControl(
+        string $meeting_id,
+        string $method,
+    ): array|Exception
+    {
+        if($method !== 'recording.start' && $method !== 'recording.stop' && $method !== 'recording.pause' && $method !== 'recording.resume') throw new Exception ('Unknown in-meeting recording control method.');
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/live_meetings/'.$meeting_id.'/events',
+            [],
+            [],
+            [
+                'method' => $method,
+            ]
+        );
+    }
+
+    /**
+     * POST /meetings/{meetingId}/batch_polls
+     *
+     * Polls allow the meeting host to survey attendees.
+     * Use this API to create batch polls for a meeting.
+     *
+     * Scopes: meeting:write:admin meeting:write
+     * Rate Limit Label: Light
+     *
+     * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param array $polls Information about the meeting's polls as an array. See docs page for schema.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function performBatchPollCreation(
+        string $meeting_id,
+        array $polls,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'POST',
+            '/meetings/'.$meeting_id.'/batch_polls',
+            [],
+            [],
+            [
+                'polls' => $polls,
+            ]
+        );
+    }
+
+    /**
+     * GET /users/{userId}/meeting_templates
+     *
+     * Use this API to list meeting templates that are available to be used by a user. For user-level apps, pass the me value instead of the userId parameter.
+     *
+     * Scopes: meeting:read, meeting:read:admin
+     * Rate Limit Label: Medium
+     *
+     * @param string $user_id ID of the User. For user-level apps, pass the `me` value instead.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function listMeetingTemplates(
+        string $user_id
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/users/'.$user_id.'/meeting_templates'
+        );
+    }
+
+    /**
+     * POST /meetings/{meetingId}/invite_links
+     *
+     * Use this API to create a batch of invitation links for a meeting.
+     *
+     * Scopes: meeting:write:admin, meeting:write
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID.
+     * @param array $attendees The attendees list as an array of... only names? I'm not sure if that's right Zoom but that's what the Docs say.
+     * @param int $ttl Invite link's expiration time in seconds. Default 7200 seconds or 120 minutes or 2 hours.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function createMeetingInviteLinks(
+        string $meeting_id,
+        array $attendees,
+        int $ttl = 7200,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'POST',
+            '/meetings/'.$meeting_id.'/invite_links',
+            [],
+            [],
+            [
+                'ttl' => $ttl,
+                'attendees' => $attendees
+            ]
+        );
+    }
+
 }

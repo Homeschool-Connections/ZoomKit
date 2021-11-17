@@ -71,4 +71,118 @@ final class ZoomKitDevices extends ZoomKit {
             ],
         );
     }
+
+    /**
+     * POST /h323/devices
+     *
+     * A H.323 or SIP device can make a video call to a Room Connector to join a Zoom cloud meeting.
+     * A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting.
+     * Use this API to add a H.323/SIP device to your Zoom account.
+     *
+     * Scopes: h323:write:admin
+     * Rate Limit Label: Light
+     *
+     * @param string $name Device name
+     * @param string $protocol Can be `H.323` or `SIP`.
+     * @param string $ip Device IP Address
+     * @param string $encryption Can be `auto`, `yes`, or `no`. Default `auto`.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function createH323SIPDevice(
+        string $name,
+        string $protocol,
+        string $ip,
+        string $encryption = 'auto'
+    ): array|Exception
+    {
+        if($encryption !== 'auto' && $encryption !== 'yes' && $encryption !== 'no') throw new Exception('Unsupported encryption status.');
+        if($protocol !== 'H.323' && $protocol !== 'SIP') throw new Exception('Unsupported device protocol.');
+
+        return ZoomKit::returnResponse(
+            'POST',
+            '/h323/devices',
+            [],
+            [],
+            [
+                'name' => $name,
+                'protocol' => $protocol,
+                'ip' => $ip,
+                'encryption' => $encryption
+            ]
+        );
+    }
+
+    /**
+     * PATCH /h323/devices/{deviceId}
+     *
+     * A H.323 or SIP device can make a video call to a Room Connector to join a Zoom cloud meeting.
+     * A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting.
+     * Use this API to edit information of a H.323/SIP device from your Zoom account.
+     *
+     * Scopes: h323:write:admin
+     * Rate Limit Label: Light
+     *
+     * @param string $device_id Device ID in Zoom to update
+     * @param string|null $name Device name
+     * @param string|null $protocol Can be `H.323` or `SIP`.
+     * @param string|null $ip Device IP Address
+     * @param string|null $encryption Can be `auto`, `yes`, or `no`.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateH323SIPDevice(
+        string $device_id,
+        ?string $name = null,
+        ?string $protocol = null,
+        ?string $ip = null,
+        ?string $encryption = null
+    ): array|Exception
+    {
+        $data = array();
+
+        if($encryption) {
+            if($encryption !== 'auto' && $encryption !== 'yes' && $encryption !== 'no') throw new Exception('Unsupported encryption status.');
+        }
+        if($protocol) {
+            if($protocol !== 'H.323' && $protocol !== 'SIP') throw new Exception('Unsupported device protocol.');
+        }
+
+        if($name) $data['name'] = $name;
+        if($protocol) $data['protocol'] = $protocol;
+        if($ip) $data['ip'] = $ip;
+        if($encryption) $data['encryption'] = $encryption;
+
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/h323/devices/'.$device_id,
+            [],
+            [],
+            $data
+        );
+    }
+
+    /**
+     * DELETE /h323/devices/{deviceId}
+     *
+     * A H.323 or SIP device can make a video call to a Room Connector to join a Zoom cloud meeting.
+     * A Room Connector can also call out to a H.323 or SIP device to join a Zoom cloud meeting.
+     * Use this API to delete a H.323/SIP device from your Zoom account.
+     *
+     * Scopes: h323:write:admin
+     * Rate Limit Label: Light
+     *
+     * @param string $device_id Device ID in Zoom to delete
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function deleteH323SIPDevice(
+        string $device_id,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'DELETE',
+            '/h323/devices/'.$device_id
+        );
+    }
 }

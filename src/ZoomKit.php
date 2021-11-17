@@ -56,13 +56,13 @@ class ZoomKit extends ZoomAPIWrapper {
         if ($response === false) {
             throw new Exception("Errors: ".implode("\n",$zoom->requestErrors()));
         } else {
-            if($zoom->responseCode() === 200 || $zoom->responseCode() === 201 || $zoom->responseCode() === 204) {
+            if($zoom->responseCode() === 200 || $zoom->responseCode() === 201 || $zoom->responseCode() === 202 || $zoom->responseCode() === 204) {
                 if($response) {
                     return $response;
                 } else {
                     // Zoom returns no JSON response for updates or deletes.
                     // So we'll write our own.
-                    if($zoom->responseCode() === 204) {
+                    if($zoom->responseCode() === 204 || $zoom->responseCode() === 202) {
                         return [
                             'status' => 204,
                             'message' => 'Action successful.'
