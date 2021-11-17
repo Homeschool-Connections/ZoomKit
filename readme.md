@@ -3,10 +3,11 @@
 Consume Zoom Meeting APIs easily from a Laravel application.
 Licensed under MIT.
 
-### Currently implemented APIs
+### Zoom API Sections
 See the [Zoom API documentation](https://marketplace.zoom.us/docs/api-reference/zoom-api) for more information.
 
 The goal is to eventually support most, if not all, of Zoom's APIs for easy consumption.
+Currently, only the **Dashboards** section of the Zoom API is implemented.
 
 - [ ] Accounts
 - [ ] Archiving
