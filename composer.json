@@ -1,0 +1,25 @@
+{
+    "name": "hsc/zoomkit",
+    "description": "ZoomKit makes it easy to consume Zoom APIs from your Laravel application",
+    "type": "library",
+    "homepage": "https://github.com/Homeschool-Connections/ZoomKit",
+    "require": {
+        "ext-curl": "*",
+        "nesbot/carbon": "^2.0",
+        "php": "^8.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "HSC\\ZoomKit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gabriel Sieben",
+            "email": "gsieben@homeschoolconnections.com",
+            "role": "Software Developer"
+        }
+    ],
+    "minimum-stability": "stable"
+}
