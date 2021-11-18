@@ -54,6 +54,7 @@ class MyClass {
 #### `ZoomKitCloudRecordings` class
 - `listAllRecordings()` - [List all recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingslist)
 - `getMeetingRecordings()` - [Get meeting recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingget)
+- `deleteMeetingRecordings()` - [Delete meeting recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingdelete)
 
 #### `ZoomKitDashboards` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetings)
