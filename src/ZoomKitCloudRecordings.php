@@ -93,6 +93,42 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         );
     }
 
-    
+    /**
+     * GET /meetings/{meetingId}/recordings
+     *
+     * Get all the recordings from a meeting or Webinar instance.
+     * The recording files can be downloaded via the download_url property listed in the response.
+     *
+     * To access a password-protected cloud recording, add an access_token parameter to the download URL and provide OAuth access token or JWT as the access_token value.
+     *
+     * Scopes: recording:read:admin, recording:read
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id Meeting ID to get recordings for. Can be ID or UUID. If ID is provided and not UUID, response will be for the latest instance. If UUID starts with / or contains a //, you must double-encode the UUID before request.
+     * @param string|null $include_fields Get the `download_access_token` field for downloading recordings.
+     * @param int|null $ttl TTL of the `download_access_token`. Only valid if `include_fields` contains `download_access_token`. Max 604800.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getMeetingRecordings(
+        string $meeting_id,
+        ?string $include_fields = null,
+        ?int $ttl = null,
+    ): array|Exception
+    {
+        if($include_fields !== null && $include_fields !== 'download_access_token') throw new Exception ('Unknown Include Fields option.');
+        if($ttl) {
+            if($ttl > 604800) throw new Exception ('TTL larger than acceptable maximum of 604800.');
+        }
+
+        return ZoomKit::returnResponse(
+            'GET',
+            '/meetings/'.$meeting_id.'/recordings',
+            [
+                'include_fields' => $include_fields,
+                'ttl' => $ttl
+            ]
+        );
+    }
 
 }
