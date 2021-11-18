@@ -159,4 +159,38 @@ final class ZoomKitCloudRecordings extends ZoomKit {
             ]
         );
     }
+
+    /**
+     * DELETE /meetings/{meetingId}/recordings/{recordingId}
+     *
+     * Delete a specific recording file from a meeting.
+     *
+     * Note: To use this API, you must enable the `The host can delete cloud recordings` setting.
+     * You can find this setting in the Recording tab of the Settings interface in the Zoom web portal.
+     *
+     * Scopes: recording:write:admin, recording:write
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id Meeting ID to delete recordings for. Can be ID or UUID. If ID is provided and not UUID, response will be for the latest instance. If UUID starts with / or contains a //, you must double-encode the UUID before request.
+     * @param string $recording_id Recording ID to specifically delete from the meeting.
+     * @param string $action Either `trash` (move to trash) or `delete` (permanent deletion).
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function deleteMeetingRecordingFile(
+        string $meeting_id,
+        string $recording_id,
+        string $action
+    ): array|Exception
+    {
+        if($action !== 'trash' && $action !== 'delete') throw new Exception ('Unsupported delete action.');
+
+        return ZoomKit::returnResponse(
+            'DELETE',
+            '/meetings/'.$meeting_id.'/recordings/'.$recording_id,
+            [
+                'action' => $action
+            ]
+        );
+    }
 }
