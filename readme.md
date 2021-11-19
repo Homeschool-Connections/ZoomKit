@@ -155,6 +155,7 @@ Zoom's smallest API section (tied with the Zoom Rooms Devices section) with only
 
 #### `ZoomKitReports` class
 - `getDailyUsageReport()` - [Get daily usage report](https://marketplace.zoom.us/docs/api-reference/zoom-api/reports/reportdaily)
+- `getActiveInactiveHostReports()` - [Get active/inactive host reports](https://marketplace.zoom.us/docs/api-reference/zoom-api/reports/reportusers)
 
 #### `ZoomKitZoomRoomsAccount` class
 - `getZoomRoomAccountProfile()` - [Get Zoom Room account profile](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/getzraccountprofile)

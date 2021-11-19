@@ -50,7 +50,6 @@ final class ZoomKitReports extends ZoomKit
      * @param int $year Year for the report.
      * @throws Exception
      */
-
     public static function getDailyUsageReport(
         int $year,
         int $month
@@ -64,6 +63,52 @@ final class ZoomKitReports extends ZoomKit
             [
                 'year' => $year,
                 'month' => $month
+            ]
+        );
+    }
+
+    /**
+     * GET /report/users
+     *
+     * A user is considered to be an active host during the month specified in the “from” and “to” range, if the user has hosted at least one meeting during this period.
+     * If the user did not host any meetings during this period, the user is considered to be inactive.
+     *
+     * The Active Hosts report displays a list of meetings, participants, and meeting minutes for a specific time range, up to one month.
+     * The month should fall within the last six months.
+     *
+     * The Inactive Hosts report pulls a list of users who were not active during a specific period of time.
+     * Use this API to retrieve an active or inactive host report for a specified period of time.
+     * The time range for the report is limited to a month and the month should fall under the past six months.
+     *
+     * You can specify the type of report and date range using the query parameters.
+     *
+     * Scopes: report:read:admin
+     * Rate Limit Label: Heavy
+     *
+     * @param string $type Active or inactive hosts. Can be `active` or `inactive`.
+     * @param Carbon|null $from Start date, no further than 1 month from `to`.
+     * @param Carbon|null $to End date, no further than 1 month from `from`.
+     * @param int|null $page_size The number of records returned from the call. Min 30, Max 300, Default 30.
+     * @param string|null $next_page_token Used for paginating through results. Expires in 15 minutes.
+     * @return array|Exception
+     */
+    public static function getActiveInactiveHostReports(
+        string $type,
+        ?Carbon $from,
+        ?Carbon $to,
+        ?int $page_size = 30,
+        ?string $next_page_token = null,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/report/users',
+            [
+                'type' => $type,
+                'from' => ($from ? $from->format('Y-m-d') : ''),
+                'to' => ($to ? $to->format('Y-m-d') : ''),
+                'page_size' => $page_size,
+                'next_page_token' => $next_page_token
             ]
         );
     }
