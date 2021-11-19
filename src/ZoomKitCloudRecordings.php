@@ -278,4 +278,67 @@ final class ZoomKitCloudRecordings extends ZoomKit {
             '/meetings/'.$meeting_id.'/recordings/settings',
         );
     }
+
+    /**
+     * PATCH /meetings/{meetingId}/recordings/settings
+     *
+     * Update settings applied to a meeting’s Cloud Recording
+     *
+     * Scopes: recording:write:admin, recording:write
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id Meeting ID to update settings for. Can be ID or UUID. If ID is provided and not UUID, response will be for the latest instance. If UUID starts with / or contains a //, you must double-encode the UUID before request.
+     * @param string|null $share_recording Determines how the recording is shared. Can be `publicly`, `internally`, or `none`.
+     * @param bool|null $recording_authentication Whether only authenticated users can view.
+     * @param string|null $authentication_option Authentication Options. (Zoom docs are really ambiguous on this one.)
+     * @param string|null $authentication_domains Authentication Domains. (Zoom docs also don't say almost anything on this one.)
+     * @param bool|null $viewer_download Whether a viewer can download the recording file or not.
+     * @param string|null $password Enable password protection for meeting. Min 8, Max 10 characters. If password strength requirements are enabled, they must be met.
+     * @param bool|null $on_demand Whether registration is required to view the recording.
+     * @param int|null $approval_type Approval type for the registration. 0 = Auto Approve on Registration, 1 = Manual Approve on Registration, 2 = No Registration.
+     * @param bool|null $send_email_to_host Send email to host when someone registers to view the recording. Only applies to on-demand recordings.
+     * @param bool|null $show_social_share_buttons Show social share buttons on registration page. Only applies to on-demand recordings.
+     * @param string|null $topic
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateMeetingRecordingSettings(
+        string $meeting_id,
+        ?string $share_recording = null,
+        ?bool $recording_authentication = null,
+        ?string $authentication_option = null,
+        ?string $authentication_domains = null,
+        ?bool $viewer_download = null,
+        ?string $password = null,
+        ?bool $on_demand = null,
+        ?int $approval_type = null,
+        ?bool $send_email_to_host = null,
+        ?bool $show_social_share_buttons = null,
+        ?string $topic = null
+    ): array|Exception
+    {
+        if($share_recording !== 'publicly' && $share_recording !== 'internally' && $share_recording !== 'none' && $share_recording !== null) throw new Exception ('Unsupported Share Recording option.');
+        if($approval_type !== null && $approval_type !== 0 && $approval_type !== 1 && $approval_type !== 2) throw new Exception ('Unsupported approval type.');
+
+        $data = array();
+        if($share_recording) $data['share_recording'] = $share_recording;
+        if($recording_authentication) $data['recording_authentication'] = $recording_authentication;
+        if($authentication_option) $data['authentication_option'] = $authentication_option;
+        if($authentication_domains) $data['authentication_domains'] = $authentication_domains;
+        if($viewer_download) $data['viewer_download'] = $viewer_download;
+        if($password) $data['password'] = $password;
+        if($on_demand) $data['on_demand'] = $on_demand;
+        if($approval_type) $data['approval_type'] = $approval_type;
+        if($send_email_to_host) $data['send_email_to_host'] = $send_email_to_host;
+        if($show_social_share_buttons) $data['show_social_share_buttons'] = $show_social_share_buttons;
+        if($topic) $data['topic'] = $topic;
+
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/meetings/'.$meeting_id.'/recordings/settings',
+            [],
+            [],
+            $data
+        );
+    }
 }
