@@ -100,4 +100,28 @@ final class ZoomKitArchiving extends ZoomKit {
             '/past_meetings/'.$meeting_UUID.'/archive_files',
         );
     }
+
+    /**
+     * DELETE /past_meetings/{meetingUUID}/archive_files
+     *
+     * Use this API to delete a meeting instance’s archived recording files.
+     *
+     * Scopes: recording:write:admin, recording:write
+     * Rate Limit Label: Light
+     *
+     * You must follow a prior enablement process to use this feature.
+     *
+     * @param string $meeting_UUID The meeting's universally unique identifier. Each meeting instance generates a new UUID. For example, after a meeting ends, a new UUID is generated for the next instance. If the UUID begins with / or contains a //, you must double-encode the meeting UUID when using the meeting UUID for other calls.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function deleteMeetingArchivedFiles(
+        string $meeting_UUID
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'DELETE',
+            '/past_meetings/'.$meeting_UUID.'/archive_files',
+        );
+    }
 }

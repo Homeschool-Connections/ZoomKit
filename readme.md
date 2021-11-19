@@ -53,6 +53,8 @@ class MyClass {
 
 #### `ZoomKitArchiving` class
 - `listArchivedFiles()` - [List archived files](https://marketplace.zoom.us/docs/api-reference/zoom-api/archiving/listarchivedfiles)
+- `getMeetingArchivedFiles()` - [Get meeting archived files](https://marketplace.zoom.us/docs/api-reference/zoom-api/archiving/testgetrecordarchivedfiles)
+- `deleteMeetingArchivedFiles()` - [Delete meeting archived files](https://marketplace.zoom.us/docs/api-reference/zoom-api/archiving/deleterecordarchivedfiles)
 
 #### `ZoomKitCloudRecordings` class
 - `listAllRecordings()` - [List all recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingslist)
@@ -153,7 +155,7 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 **Currently, only the API sections marked as partially or fully implemented / complete are present.**
 
 - [ ] Accounts
-- [ ] Archiving
+- [x] Archiving (complete)
 - [ ] Billing
 - [ ] Chat Channels
 - [ ] Chat Channels (Account-level)
