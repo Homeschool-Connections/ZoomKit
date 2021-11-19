@@ -148,6 +148,9 @@ Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that
 Zoom's smallest API section with only one function.
 - `listUserPACAccounts()` - [List a user's PAC accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/pac/userpacs)
 
+#### `ZoomKitZoomRoomsDevices` class
+- `changeZoomRoomsAppVersion()` - [Change Zoom Rooms app version](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-devices/changezoomroomsappversion)
+
 ### Zoom API Sections
 See the [Zoom API documentation](https://marketplace.zoom.us/docs/api-reference/zoom-api) for more information.
 
@@ -181,4 +184,4 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] Zoom Rooms
 - [ ] Zoom Rooms Account
 - [ ] Zoom Rooms Location
-- [ ] Zoom Rooms Devices
+- [x] Zoom Rooms Devices
