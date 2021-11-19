@@ -580,17 +580,17 @@ final class ZoomKitMeetings extends ZoomKit {
      * Scopes: meeting:read:admin, meeting:read
      * Rate Limit Label: Light
      *
-     * @param string $meetingUUID The meeting's universally unique identifier. Each meeting instance generates a new UUID. For example, after a meeting ends, a new UUID is generated for the next instance. If the UUID begins with / or contains a //, you must double-encode the meeting UUID when using the meeting UUID for other calls.
+     * @param string $meeting_UUID The meeting's universally unique identifier. Each meeting instance generates a new UUID. For example, after a meeting ends, a new UUID is generated for the next instance. If the UUID begins with / or contains a //, you must double-encode the meeting UUID when using the meeting UUID for other calls.
      * @return array|Exception
      * @throws Exception
      */
     public static function getPastMeetingDetails(
-        string $meetingUUID,
+        string $meeting_UUID,
     ): array|Exception
     {
         return ZoomKit::returnResponse(
             'GET',
-            '/past_meetings/'.$meetingUUID,
+            '/past_meetings/'.$meeting_UUID,
         );
     }
 
@@ -602,21 +602,21 @@ final class ZoomKitMeetings extends ZoomKit {
      * Scopes: meeting:read:admin, meeting:read
      * Rate Limit Label: Medium
      *
-     * @param string $meetingUUID The meeting's universally unique identifier. Each meeting instance generates a new UUID. For example, after a meeting ends, a new UUID is generated for the next instance. If the UUID begins with / or contains a //, you must double-encode the meeting UUID when using the meeting UUID for other calls.
+     * @param string $meeting_UUID The meeting's universally unique identifier. Each meeting instance generates a new UUID. For example, after a meeting ends, a new UUID is generated for the next instance. If the UUID begins with / or contains a //, you must double-encode the meeting UUID when using the meeting UUID for other calls.
      * @param int $page_size Number of results per page, min 30, max 300.
      * @param string|null $next_page_token Provide this token for viewing a different page in the paginated result. Expires after 15 min.
      * @return array|Exception
      * @throws Exception
      */
     public static function getPastMeetingParticipants(
-        string $meetingUUID,
+        string $meeting_UUID,
         int $page_size = 30,
         ?string $next_page_token = null,
     ): array|Exception
     {
         return ZoomKit::returnResponse(
             'GET',
-            '/past_meetings/'.$meetingUUID.'/participants',
+            '/past_meetings/'.$meeting_UUID.'/participants',
             [
                 'page_size' => $page_size,
                 'next_page_token' => $next_page_token

@@ -76,4 +76,28 @@ final class ZoomKitArchiving extends ZoomKit {
             ]
         );
     }
+
+    /**
+     * GET /past_meetings/{meetingUUID}/archive_files
+     *
+     * List the archived recording files of the specific meeting instance.
+     *
+     * Scopes: recording:read
+     * Rate Limit Label: Light
+     *
+     * You must follow a prior enablement process to use this feature.
+     *
+     * @param string $meeting_UUID The meeting's universally unique identifier. Each meeting instance generates a new UUID. For example, after a meeting ends, a new UUID is generated for the next instance. If the UUID begins with / or contains a //, you must double-encode the meeting UUID when using the meeting UUID for other calls.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getMeetingArchivedFiles(
+        string $meeting_UUID,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/past_meetings/'.$meeting_UUID.'/archive_files',
+        );
+    }
 }
