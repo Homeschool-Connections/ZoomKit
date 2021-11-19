@@ -51,6 +51,9 @@ class MyClass {
 
 ### Currently implemented functions
 
+#### `ZoomKitArchiving` class
+- `listArchivedFiles()` - [List archived files](https://marketplace.zoom.us/docs/api-reference/zoom-api/archiving/listarchivedfiles)
+
 #### `ZoomKitCloudRecordings` class
 - `listAllRecordings()` - [List all recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingslist)
 - `getMeetingRecordings()` - [Get meeting recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingget)
@@ -139,7 +142,7 @@ Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that
 - `createScheduledMeeting()` - Simplified call of `ZoomKitMeetings::createMeeting()` specific to Scheduled Meetings
 - `endMeeting()` - Simplified call of `ZoomKitMeeting::updateMeetingStatus()` to simply end a meeting.
 
-##### `ZoomKitPAC` class
+#### `ZoomKitPAC` class
 Zoom's smallest API section with only one function.
 - `listUserPACAccounts()` - [List a user's PAC accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/pac/userpacs)
 
