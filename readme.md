@@ -139,6 +139,10 @@ Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that
 - `createScheduledMeeting()` - Simplified call of `ZoomKitMeetings::createMeeting()` specific to Scheduled Meetings
 - `endMeeting()` - Simplified call of `ZoomKitMeeting::updateMeetingStatus()` to simply end a meeting.
 
+##### `ZoomKitPAC` class
+Zoom's smallest API section with only one function.
+- `listUserPACAccounts()` - [List a user's PAC accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/pac/userpacs)
+
 ### Zoom API Sections
 See the [Zoom API documentation](https://marketplace.zoom.us/docs/api-reference/zoom-api) for more information.
 
@@ -160,7 +164,7 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] IM Chat
 - [ ] IM Groups
 - [x] Meetings (complete)
-- [ ] PAC
+- [x] PAC (complete)
 - [ ] Reports
 - [ ] Roles
 - [ ] SIP Connected Audio
