@@ -110,4 +110,34 @@ final class ZoomKitZoomRoomsAccount extends ZoomKit {
             ]
         );
     }
+
+    /**
+     * GET /rooms/account_settings
+     *
+     * Get details on Account Settings of a Zoom Room.
+     * With this API, you can view either the Account Meeting Settings or the Alert Settings (Client Alert Settings and Notifications Settings) of the Zoom Rooms account.
+     * By default, only Account Meeting Settings are returned.
+     * To view only Alert Settings, specify alert as the value of the setting_type query parameter.
+     *
+     * Scopes: room:read:admin
+     * Rate Limit Label: Medium
+     *
+     * @param string $setting_type Type of setting to retrieve for the Zoom Rooms account. `alert` for Alert Settings. `meeting` for Meeting Settings (default). `signage` for Digital Signage settings.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getZoomRoomAccountSettings(
+        string $setting_type = 'meeting'
+    ): array|Exception
+    {
+        if($setting_type !== 'meeting' && $setting_type !== 'alert' && $setting_type !== 'signage') throw new Exception ('Unsupported type of setting to retrieve.');
+
+        return ZoomKit::returnResponse(
+            'GET',
+            '/rooms/account_settings',
+            [
+                'setting_type' => $setting_type,
+            ]
+        );
+    }
 }
