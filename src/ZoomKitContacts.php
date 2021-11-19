@@ -48,7 +48,7 @@ final class ZoomKitContacts extends ZoomKit {
      * Rate Limit Label: Medium
      *
      * @param string $search_key Provide the keyword - first name, last name, or email.
-     * @param string|null $query_presence_status Strangely a string, set to "true" to include the presence status of a contact in the response.
+     * @param bool $query_presence_status Set to `true` to include the presence status of a contact in the response. Default false.
      * @param int|null $page_size Number of records to be returned by the API call. Default and minimum 1, Maximum 25.
      * @param int|null $contact_types 1 - Zoom User (default), 2 - Auto Receptionist, 3 - Common Area Phone, 4 - Call Queue, 5 - Shared Line Group, 6 - Shared Global Directory, 7 - Shared Office Contact
      * @param string|null $next_page_token The next page token is for too-large paginated results. Expires after 15 minutes.
@@ -57,7 +57,7 @@ final class ZoomKitContacts extends ZoomKit {
      */
     public static function searchCompanyContacts(
         string $search_key,
-        ?string $query_presence_status = null,
+        bool $query_presence_status = false,
         ?int $page_size = 1,
         ?int $contact_types = 1,
         ?string $next_page_token = null
@@ -121,6 +121,37 @@ final class ZoomKitContacts extends ZoomKit {
                 'type' => $type,
                 'page_size' => $page_size,
                 'next_page_token' => $next_page_token
+            ]
+        );
+    }
+
+    /**
+     * GET /chat/users/me/contacts/{contactId}
+     *
+     * A user under an organization’s Zoom account has internal users listed under Company Contacts in the Zoom Client.
+     * A Zoom user can also add another Zoom user as a contact.
+     * Call this API to get information on a specific contact of the Zoom user.
+     *
+     * Note: This API only supports user-managed OAuth app.
+     *
+     * Scope: chat_contact:read
+     * Rate Limit Label: Medium
+     *
+     * @param string $contact_id ID of the Contact to get information for.
+     * @param bool $query_presence_status Set to `true` to include the presence status of a contact in the response. Default false.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getUserContactDetails(
+        string $contact_id,
+        bool $query_presence_status = false
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/chat/users/me/contacts/'.$contact_id,
+            [
+                'query_presence_status' => $query_presence_status
             ]
         );
     }
