@@ -341,4 +341,44 @@ final class ZoomKitCloudRecordings extends ZoomKit {
             $data
         );
     }
+
+    /**
+     * GET /meetings/{meetingId}/recordings/registrants
+     *
+     * Cloud Recordings of past Zoom Meetings can be made on-demand.
+     * Users should be registered to view these recordings.
+     *
+     * Use this API to list registrants of On-demand Cloud Recordings of a past meeting.
+     *
+     * Scopes: recording:read:admin, recording:read
+     * Rate Limit Label: Medium
+     *
+     * @param string $meeting_id The meeting ID in long format, no UUIDs it seems from the documentation, but that could be an error?
+     * @param string $status Registrant status to fetch. Can be `pending`, `approved` (default), or `denied`.
+     * @param int|null $page_size The number of records returned from the call, minimum 30, maximum 300. Default 30.
+     * @param string|null $next_page_token The next page token is used to paginate through large set results. A next page token will be returned when the available results exceed the current page size. Expires in 15 minutes.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function listRecordingRegistrants(
+        string $meeting_id,
+        string $status = 'approved',
+        ?int $page_size = 30,
+        ?string $next_page_token = null
+    ): array|Exception
+    {
+        if($status !== 'pending' && $status !== 'approved' && $status !== 'denied') throw new Exception ('Unsupported status type.');
+
+        return ZoomKit::returnResponse(
+            'GET',
+            '/meetings/'.$meeting_id.'/recordings/registrants',
+            [
+                'status' => $status,
+                'page_size' => $page_size,
+                'next_page_token' => $next_page_token
+            ]
+        );
+    }
+
+
 }

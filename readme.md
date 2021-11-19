@@ -60,6 +60,7 @@ class MyClass {
 - `recoverSingleRecording()` - [Recover single recording](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingstatusupdateone)
 - `getMeetingRecordingSettings()` - [Get meeting recording settings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingsettingupdate)
 - `updateMeetingRecordingSettings()` - [Update meeting recording settings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingsettingsupdate)
+- `listRecordingRegistrants()` - [List recording registrants](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/meetingrecordingregistrants)
 
 #### `ZoomKitDashboards` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetings)
