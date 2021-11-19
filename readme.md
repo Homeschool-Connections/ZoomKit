@@ -75,6 +75,7 @@ class MyClass {
 #### `ZoomKitContacts` class
 - `searchCompanyContacts()` - [Search company contacts](https://marketplace.zoom.us/docs/api-reference/zoom-api/contacts/searchcompanycontacts)
 - `listUserContacts()` - [List user contacts](https://marketplace.zoom.us/docs/api-reference/zoom-api/contacts/getusercontacts)
+- `getUserContactDetails()` - [Get user contact details](https://marketplace.zoom.us/docs/api-reference/zoom-api/contacts/getusercontact)
 
 #### `ZoomKitDashboards` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetings)
@@ -168,7 +169,7 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] Chat Channels (Account-level)
 - [ ] Chat Messages
 - [ ] Chatbot Messages
-- [ ] Contacts
+- [x] Contacts
 - [x] Cloud Recording (complete)
 - [x] Dashboards (complete)
 - [x] Devices (complete)
