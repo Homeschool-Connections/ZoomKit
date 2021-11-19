@@ -56,6 +56,7 @@ class MyClass {
 - `getMeetingRecordings()` - [Get meeting recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingget)
 - `deleteMeetingRecordings()` - [Delete meeting recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingdelete)
 - `deleteMeetingRecordingFile()` - [Delete meeting recording file](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingdeleteone)
+- `recoverMeetingRecordings()` - [Recover meeting recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingstatusupdate)
 
 #### `ZoomKitDashboards` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetings)

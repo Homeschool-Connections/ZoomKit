@@ -193,4 +193,38 @@ final class ZoomKitCloudRecordings extends ZoomKit {
             ]
         );
     }
+
+    /**
+     * PUT /meetings/{meetingId}/recordings/status
+     *
+     * Zoom allows users to recover recordings from trash for up to 30 days from the deletion date.
+     * Use this API to recover all deleted Cloud Recordings of a specific meeting.
+     *
+     * This Zoom API is a questionable implementation on Zoom's part because it requires an action
+     * field, but there's only one available action. Which means, what's the !@#$%^& point Zoom?
+     *
+     * Scopes: recording:write:admin, recording:write
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id Meeting ID to recover recordings for. Can be ID or UUID. If ID is provided and not UUID, response will be for the latest instance. If UUID starts with / or contains a //, you must double-encode the UUID before request.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function recoverMeetingRecordings(
+        string $meeting_id,
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'PUT',
+            '/meetings/'.$meeting_id.'/recordings/status',
+            [],
+            [],
+            [
+                'action' => 'recover'
+            ]
+        );
+    }
+
+    
+
 }
