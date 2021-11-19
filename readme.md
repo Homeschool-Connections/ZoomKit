@@ -192,7 +192,7 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] Users
 - [ ] Webinars
 - [ ] Zoom Rooms
-- [x] Zoom Rooms Account
+- [x] Zoom Rooms Account (complete)
 - [ ] Zoom Rooms Location
 - [x] Zoom Rooms Devices (complete)
 
