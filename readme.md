@@ -174,7 +174,6 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [x] Dashboards (complete)
 - [x] Devices (complete)
 - [ ] Groups
-- [ ] IM Chat
 - [ ] IM Groups
 - [x] Meetings (complete)
 - [x] PAC (complete)
@@ -190,3 +189,7 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] Zoom Rooms Account
 - [ ] Zoom Rooms Location
 - [x] Zoom Rooms Devices (complete)
+
+I hope to eventually complete all the Zoom API sections.
+I will not be implementing deprecated functions (such as the IM Chat section of APIs).
+If APIs are deprecated after I've already implemented them, they will remain implemented until they are shut down.
