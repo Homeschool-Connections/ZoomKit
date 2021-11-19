@@ -257,4 +257,25 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         );
     }
 
+    /**
+     * GET /meetings/{meetingId}/recordings/settings
+     *
+     * Retrieve settings applied to a meeting’s Cloud Recording.
+     *
+     * Scopes: recording:read:admin, recording:read
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id Meeting ID to get settings for. Can be ID or UUID. If ID is provided and not UUID, response will be for the latest instance. If UUID starts with / or contains a //, you must double-encode the UUID before request.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function getMeetingRecordingSettings(
+        string $meeting_id
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/meetings/'.$meeting_id.'/recordings/settings',
+        );
+    }
 }
