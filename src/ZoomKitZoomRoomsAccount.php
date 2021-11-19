@@ -60,4 +60,54 @@ final class ZoomKitZoomRoomsAccount extends ZoomKit {
             '/rooms/account_profile'
         );
     }
+
+    /**
+     * PATCH /rooms/account_profile
+     *
+     * Update information on the account profile of a Zoom Room.
+     * This information can only be accessed by either by the Zoom Room Account Owner or a user with Zoom Rooms admin permission.
+     * To update information on an individual Room Profile, use Update Zoom Room Profile API instead.
+     *
+     * Scopes: room:write:admin
+     * Rate Limit Label: Medium
+     *
+     * @param string|null $support_email The email address used for reporting Zoom Rooms issues.
+     * @param string|null $support_phone The phone number used for reporting Zoom Rooms issues.
+     * @param string|null $room_passcode 1-16 digit number or characters used to secure your Zoom Rooms application. Code must be entered to change settings or log out.
+     * @param bool|null $required_code_to_ext Require code to exit out of the Zoom Rooms application or to switch between other apps.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateZoomRoomAccountProfile(
+        ?string $support_email = null,
+        ?string $support_phone = null,
+        ?string $room_passcode = null,
+        ?bool $required_code_to_ext = null,
+    ): array|Exception
+    {
+        $data = array();
+
+        if($room_passcode) {
+            if ($room_passcode > 16) {
+                throw new Exception ('Room passcode is too long.');
+            } elseif ($room_passcode < 1) {
+                throw new Exception ('Room passcode is too short.');
+            }
+        }
+
+        if($support_email) $data['support_email'] = $support_email;
+        if($support_phone) $data['support_phone'] = $support_phone;
+        if($room_passcode) $data['room_passcode'] = $room_passcode;
+        if($required_code_to_ext) $data['required_code_to_ext'] = $required_code_to_ext;
+
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/rooms/account_profile',
+            [],
+            [],
+            [
+                'basic' => $data,
+            ]
+        );
+    }
 }
