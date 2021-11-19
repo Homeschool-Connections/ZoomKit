@@ -169,7 +169,7 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] Chat Channels (Account-level)
 - [ ] Chat Messages
 - [ ] Chatbot Messages
-- [x] Contacts
+- [x] Contacts (complete)
 - [x] Cloud Recording (complete)
 - [x] Dashboards (complete)
 - [x] Devices (complete)
@@ -189,4 +189,4 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] Zoom Rooms
 - [ ] Zoom Rooms Account
 - [ ] Zoom Rooms Location
-- [x] Zoom Rooms Devices
+- [x] Zoom Rooms Devices (complete)
