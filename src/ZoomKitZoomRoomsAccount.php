@@ -6,7 +6,7 @@ use Exception;
 
 final class ZoomKitZoomRoomsAccount extends ZoomKit {
     /**
-     * ZoomKit APIs for the Zoom Rooms Devices Section of Zoom API
+     * ZoomKit APIs for the Zoom Rooms Accounts Section of Zoom API
      *
      * MIT License
      * Code Copyright (c) 2021 Homeschool Connections
