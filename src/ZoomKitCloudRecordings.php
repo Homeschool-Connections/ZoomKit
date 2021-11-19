@@ -559,4 +559,47 @@ final class ZoomKitCloudRecordings extends ZoomKit {
             ]
         );
     }
+
+    /**
+     * GET /accounts/{accountId}/recordings
+     *
+     * List Cloud Recordings available on an Account.
+     * To access a password protected cloud recording, add an “access_token” parameter to the download URL and provide JWT as the value of the “access_token”.
+     *
+     * Scopes: recording:read:admin, account:read:admin
+     *
+     * If the scope recording:read:admin is used, the Account ID of the Account must be provided in the `accountId` path parameter to list recordings that belong to the Account.
+     * This scope only works for sub-accounts.
+     *
+     * To list recordings of a master account, the scope must be account:read:admin and the value of `accountId` should be `me`.
+     *
+     * Rate Limit Label: Medium
+     *
+     * @param string $account_id Unique ID of the account.
+     * @param Carbon|null $from List meetings from this Carbon date. Default is the current date. Trash files cannot be sorted by date. Maximum range is one month.
+     * @param Carbon|null $to List meetings up to this Carbon date.
+     * @param int|null $page_size The number of records returned from the call, minimum 30, maximum 300.
+     * @param string|null $next_page_token The next page token is used to paginate through large set results. A next page token will be returned when the available results exceed the current page size. Expires in 15 minutes.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function listAccountRecordings(
+        string $account_id,
+        ?Carbon $from = null,
+        ?Carbon $to = null,
+        ?int $page_size = 30,
+        ?string $next_page_token = null
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'GET',
+            '/accounts/'.$account_id.'/recordings',
+            [
+                'from' => ($from ? $from->format('Y-m-d') : ''),
+                'to' => ($to ? $to->format('Y-m-d') : ''),
+                'page_size' => $page_size,
+                'next_page_token' => $next_page_token
+            ]
+        );
+    }
 }

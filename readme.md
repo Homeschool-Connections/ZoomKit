@@ -65,6 +65,7 @@ class MyClass {
 - `updateRegistrantsStatus()` - [Update registrants status](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/meetingrecordingregistrantstatus)
 - `getRegistrationQuestions()` - [Get registration questions](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingregistrantsquestionsget)
 - `updateRegistrationQuestions()` - [Update registration questions](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingregistrantquestionupdate)
+- `listAccountRecordings()` - [List account recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/getaccountcloudrecording)
 
 #### `ZoomKitDashboards` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetings)
@@ -142,7 +143,7 @@ Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that
 See the [Zoom API documentation](https://marketplace.zoom.us/docs/api-reference/zoom-api) for more information.
 
 The goal is to eventually support most, if not all, of Zoom's APIs for easy consumption.
-**Currently, only the API sections marked as partially or fully implemented are present.**
+**Currently, only the API sections marked as partially or fully implemented / complete are present.**
 
 - [ ] Accounts
 - [ ] Archiving
@@ -152,13 +153,13 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] Chat Messages
 - [ ] Chatbot Messages
 - [ ] Contacts
-- [ ] Cloud Recording
-- [x] Dashboards (**fully implemented**)
-- [x] Devices (**fully implemented**)
+- [x] Cloud Recording (complete)
+- [x] Dashboards (complete)
+- [x] Devices (complete)
 - [ ] Groups
 - [ ] IM Chat
 - [ ] IM Groups
-- [x] Meetings (**fully implemented**)
+- [x] Meetings (complete)
 - [ ] PAC
 - [ ] Reports
 - [ ] Roles
