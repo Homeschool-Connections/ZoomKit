@@ -145,7 +145,7 @@ Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that
 - `endMeeting()` - Simplified call of `ZoomKitMeeting::updateMeetingStatus()` to simply end a meeting.
 
 #### `ZoomKitPAC` class
-Zoom's smallest API section with only one function.
+Zoom's smallest API section (tied with the Zoom Rooms Devices section) with only one function.
 - `listUserPACAccounts()` - [List a user's PAC accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/pac/userpacs)
 
 #### `ZoomKitZoomRoomsDevices` class
