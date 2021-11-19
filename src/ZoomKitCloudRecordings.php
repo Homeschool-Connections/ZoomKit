@@ -380,5 +380,89 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         );
     }
 
+    /**
+     * POST /meetings/{meetingId}/recordings/registrants
+     *
+     * Cloud Recordings of past Zoom Meetings can be made on-demand.
+     * Users should be registered to view these recordings.
+     *
+     * Use this API to register a user to gain access to On-demand Cloud Recordings of a past meeting.
+     *
+     * WARNING: There are validations on this data required that this API implementation does not attempt to handle.
+     * Please read the Zoom Docs for information about approved values.
+     *
+     * Scopes: recording:write:admin, recording:write.
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id The meeting ID in long format, no UUIDs it seems from the documentation, but that could be an error?
+     * @param string $email A valid email address for the registrant.
+     * @param string $first_name First name of the registrant.
+     * @param string|null $last_name Last name
+     * @param string|null $address Address
+     * @param string|null $city City
+     * @param string|null $country Country (two letters)
+     * @param string|null $zip ZIP / Postal Code
+     * @param string|null $state State / Province
+     * @param string|null $phone Phone Number
+     * @param string|null $industry Industry
+     * @param string|null $org Organization
+     * @param string|null $job_title Job Title
+     * @param string|null $purchasing_time_frame Purchasing Time Frame. 5 valid options: Within a month, 1-3 months, 4-6 months, More than 6 months, No timeframe
+     * @param string|null $role_in_purchase_process Role in Purchase Process. 4 valid options: Decision Maker, Evaluator/Recommender, Influencer, Not involved
+     * @param string|null $no_of_employees Number of employees. 8 valid options: 1-20, 21-50, 51-100, 101-500, 501-1,000, 1,001-5,000, 5,001-10,000, More than 10,000
+     * @param string|null $comments Registrants can provide any questions or comments they have in this field
+     * @param array|null $custom_questions Custom questions in the form of an array
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function createRecordingRegistrant(
+        string $meeting_id,
+        string $email,
+        string $first_name,
+        ?string $last_name = null,
+        ?string $address = null,
+        ?string $city = null,
+        ?string $country = null,
+        ?string $zip = null,
+        ?string $state = null,
+        ?string $phone = null,
+        ?string $industry = null,
+        ?string $org = null,
+        ?string $job_title = null,
+        ?string $purchasing_time_frame = null,
+        ?string $role_in_purchase_process = null,
+        ?string $no_of_employees = null,
+        ?string $comments = null,
+        ?array $custom_questions = null,
+    ): array|Exception
+    {
+        $data = [
+            'email' => $email,
+            'first_name' => $first_name
+        ];
+        if($last_name) $data['last_name'] = $last_name;
+        if($address) $data['address'] = $address;
+        if($city) $data['city'] = $city;
+        if($country) $data['country'] = $country;
+        if($zip) $data['zip'] = $zip;
+        if($state) $data['state'] = $state;
+        if($phone) $data['phone'] = $phone;
+        if($industry) $data['industry'] = $industry;
+        if($org) $data['org'] = $org;
+        if($job_title) $data['job_title'] = $job_title;
+        if($purchasing_time_frame) $data['purchasing_time_frame'] = $purchasing_time_frame;
+        if($role_in_purchase_process) $data['role_in_purchase_process'] = $role_in_purchase_process;
+        if($no_of_employees) $data['no_of_employees'] = $no_of_employees;
+        if($comments) $data['comments'] = $comments;
+        if($custom_questions) $data['custom_questions'] = $custom_questions;
+
+        return ZoomKit::returnResponse(
+            'POST',
+            '/meetings/'.$meeting_id.'/recordings/registrants',
+            [],
+            [],
+            $data
+        );
+    }
 
 }
