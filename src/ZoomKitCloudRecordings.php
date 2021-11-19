@@ -465,4 +465,42 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         );
     }
 
+    /**
+     * PUT /meetings/{meetingId}/recordings/registrants/status
+     *
+     * A registrant can either be approved or denied from viewing the on-demand recording.
+     * Use this API to update a registrant’s status.
+     *
+     * NOTE: Zoom Docs use punctuation and description as though this can be used to update
+     * one registration at a time, but in practice the API accepts an array of registrant
+     * IDs to update them all at once - thus the slightly awkward plural function name.
+     *
+     * Scopes: recording:write:admin, recording:write
+     * Rate Limit Label: Medium
+     *
+     * @param string $meeting_id The meeting ID in long format, no UUIDs it seems from the documentation, but that could be an error?
+     * @param string $action Either `approve` or `deny`.
+     * @param array $registrants Array of registrants with IDs, see Zoom Docs for format.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateRegistrantsStatus(
+        string $meeting_id,
+        string $action,
+        array $registrants
+    ): array|Exception
+    {
+        if($action !== 'approve' && $action !== 'deny') throw new Exception ('Unsupported action.');
+
+        return ZoomKit::returnResponse(
+            'PUT',
+            '/meetings/'.$meeting_id.'/recordings/registrants/status',
+            [],
+            [],
+            [
+                'action' => $action,
+                'registrants' => $registrants
+            ]
+        );
+    }
 }
