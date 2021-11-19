@@ -153,6 +153,9 @@ Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that
 Zoom's smallest API section (tied with the Zoom Rooms Devices section) with only one function.
 - `listUserPACAccounts()` - [List a user's PAC accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/pac/userpacs)
 
+#### `ZoomKitReports` class
+- `getDailyUsageReport()` - [Get daily usage report](https://marketplace.zoom.us/docs/api-reference/zoom-api/reports/reportdaily)
+
 #### `ZoomKitZoomRoomsAccount` class
 - `getZoomRoomAccountProfile()` - [Get Zoom Room account profile](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/getzraccountprofile)
 - `updateZoomRoomAccountProfile()` - [Update Zoom Room account profile](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/updatezraccprofile)
