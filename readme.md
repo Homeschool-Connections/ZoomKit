@@ -157,6 +157,7 @@ Zoom's smallest API section (tied with the Zoom Rooms Devices section) with only
 - `getZoomRoomAccountProfile()` - [Get Zoom Room account profile](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/getzraccountprofile)
 - `updateZoomRoomAccountProfile()` - [Update Zoom Room account profile](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/updatezraccprofile)
 - `getZoomRoomAccountSettings()` - [Get Zoom Room account settings](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/getzraccountsettings)
+- `updateZoomRoomAccountSettings()` - [Update Zoom Room account settings](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/updatezoomroomaccsettings)
 
 #### `ZoomKitZoomRoomsDevices` class
 - `changeZoomRoomsAppVersion()` - [Change Zoom Rooms app version](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-devices/changezoomroomsappversion)
@@ -191,7 +192,7 @@ The goal is to eventually support most, if not all, of Zoom's APIs for easy cons
 - [ ] Users
 - [ ] Webinars
 - [ ] Zoom Rooms
-- [ ] Zoom Rooms Account
+- [x] Zoom Rooms Account
 - [ ] Zoom Rooms Location
 - [x] Zoom Rooms Devices (complete)
 

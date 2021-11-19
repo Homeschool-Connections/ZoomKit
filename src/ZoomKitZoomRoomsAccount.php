@@ -140,4 +140,37 @@ final class ZoomKitZoomRoomsAccount extends ZoomKit {
             ]
         );
     }
+
+    /**
+     * PATCH /rooms/account_settings
+     *
+     * NOTE: This API really should be two separate ones in Zoom - it's messy!
+     *
+     * Update account settings applied for Zoom Rooms in a Zoom account.
+     * With this API, you can update either the Account Meeting Settings or the Alert Settings (Client Alert Settings and Notifications Settings) of the Zoom Rooms account by specifying the required setting type in the setting_type parameter.
+     * To update only Alert Settings, specify alert as the value of the setting_type query parameter and to update only Account Meeting Settings, specify meeting as the value of the setting_type query parameter.
+     *
+     * Scopes: room:write:admin
+     * Rate Limit Label: Medium
+     *
+     * @param string $setting_type Type of setting to update for the Zoom Rooms account. `alert` for Alert Settings. `meeting` for Meeting Settings (default). `signage` for Digital Signage settings.
+     * @param array $data Settings data to update. Read the Zoom docs for more information. This API does too much and is very confusing - and so I haven't tried to build automatic processing, it's bad. TODO: Revisit this later for fully native implementation.
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateZoomRoomAccountSettings(
+        string $setting_type,
+        array $data
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/rooms/account_settings',
+            [
+                'setting_type' => $setting_type
+            ],
+            [],
+            $data
+        );
+    }
 }
