@@ -527,4 +527,36 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         );
     }
 
+    /**
+     * PATCH /meetings/{meetingId}/recordings/registrants/questions
+     *
+     * For on-demand meeting recordings, you can include fields with questions that will be shown to registrants when they register to view the recording.
+     * Use this API to update registration questions that are to be answered by users while registering to view a recording.
+     *
+     * Scopes: recording:write:admin, recording:write
+     * Rate Limit Label: Light
+     *
+     * @param string $meeting_id Meeting ID to get settings for. Can be ID or UUID. If ID is provided and not UUID, response will be for the latest instance. If UUID starts with / or contains a //, you must double-encode the UUID before request.
+     * @param array|null $questions Array of registrant questions
+     * @param array|null $custom_questions Array of registrant custom questions
+     * @return array|Exception
+     * @throws Exception
+     */
+    public static function updateRegistrationQuestions(
+        string $meeting_id,
+        ?array $questions = null,
+        ?array $custom_questions = null
+    ): array|Exception
+    {
+        return ZoomKit::returnResponse(
+            'PATCH',
+            '/meetings/'.$meeting_id.'/recordings/registrants/questions',
+            [],
+            [],
+            [
+                'questions' => $questions,
+                'custom_questions' => $custom_questions
+            ]
+        );
+    }
 }
