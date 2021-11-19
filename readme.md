@@ -72,6 +72,10 @@ class MyClass {
 - `updateRegistrationQuestions()` - [Update registration questions](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingregistrantquestionupdate)
 - `listAccountRecordings()` - [List account recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/getaccountcloudrecording)
 
+#### `ZoomKitContacts` class
+- `searchCompanyContacts()` - [Search company contacts](https://marketplace.zoom.us/docs/api-reference/zoom-api/contacts/searchcompanycontacts)
+- `listUserContacts()` - [List user contacts](https://marketplace.zoom.us/docs/api-reference/zoom-api/contacts/getusercontacts)
+
 #### `ZoomKitDashboards` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetings)
 - `getMeetingDetails()` - [Get meeting details](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetingdetail)
