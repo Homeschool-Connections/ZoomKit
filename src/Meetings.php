@@ -2,10 +2,9 @@
 
 namespace HSC\ZoomKit;
 use Carbon\Carbon;
-use Cassandra\Custom;
 use Exception;
 
-final class ZoomKitMeetings extends ZoomKit {
+final class Meetings extends Response {
     /**
      * ZoomKit for the Meetings Section of Zoom API
      *
@@ -68,7 +67,7 @@ final class ZoomKitMeetings extends ZoomKit {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
         if($type !== 'live' && $type !== 'upcoming' && $type !== 'scheduled') throw new Exception('Invalid meeting type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/users/'.$user_id.'/meetings',
             [
@@ -165,7 +164,7 @@ final class ZoomKitMeetings extends ZoomKit {
             'template_id' => $template_id,
         ];
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/users/'.$user_id.'/meetings',
             [],
@@ -194,7 +193,7 @@ final class ZoomKitMeetings extends ZoomKit {
         bool $show_previous_occurrences = false,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id,
             [
@@ -271,7 +270,7 @@ final class ZoomKitMeetings extends ZoomKit {
         if($recurrence) $data['recurrence'] = $recurrence;
         if($settings) $data['settings'] = $settings;
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/meetings/'.$meeting_id,
             [
@@ -303,7 +302,7 @@ final class ZoomKitMeetings extends ZoomKit {
         bool $cancel_meeting_reminder = false,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'DELETE',
             '/meetings/'.$meeting_id,
             [
@@ -338,7 +337,7 @@ final class ZoomKitMeetings extends ZoomKit {
             'action' => $action,
         ];
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PUT',
             '/meetings/'.$meeting_id.'/status',
             [],
@@ -375,7 +374,7 @@ final class ZoomKitMeetings extends ZoomKit {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
         if($status !== 'pending' && $status !== 'approved' && $status !== 'denied') throw new Exception('Unsupported status type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/registrants',
             [
@@ -471,7 +470,7 @@ final class ZoomKitMeetings extends ZoomKit {
         if($language) $data['language'] = $language;
         if($auto_approve) $data['auto_approve'] = $auto_approve;
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/meetings/'.$meeting_id.'/registrants',
             [
@@ -502,7 +501,7 @@ final class ZoomKitMeetings extends ZoomKit {
         ?string $occurrence_id = null
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'DELETE',
             '/meetings/'.$meeting_id.'/registrants/'.$registrant_id,
             [
@@ -530,7 +529,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $registrant_id,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/registrants/'.$registrant_id,
         );
@@ -558,7 +557,7 @@ final class ZoomKitMeetings extends ZoomKit {
         ?string $occurrence_id = null
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PUT',
             '/meetings/'.$meeting_id.'/registrants/status',
             [
@@ -588,7 +587,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $meeting_UUID,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/past_meetings/'.$meeting_UUID,
         );
@@ -614,7 +613,7 @@ final class ZoomKitMeetings extends ZoomKit {
         ?string $next_page_token = null,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/past_meetings/'.$meeting_UUID.'/participants',
             [
@@ -640,7 +639,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $meeting_id,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/past_meetings/'.$meeting_id.'/instances',
         );
@@ -664,7 +663,7 @@ final class ZoomKitMeetings extends ZoomKit {
         bool $anonymous = true,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/polls',
             [
@@ -701,7 +700,7 @@ final class ZoomKitMeetings extends ZoomKit {
     {
         if($poll_type !== 1 && $poll_type !== 2 && $poll_type !== 3) throw new Exception ('Not a supported poll type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/meetings/'.$meeting_id.'/polls',
             [],
@@ -734,7 +733,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $poll_id,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/meetings/'.$meeting_id.'/polls/'.$poll_id
         );
@@ -778,7 +777,7 @@ final class ZoomKitMeetings extends ZoomKit {
         if($poll_type) $data['poll_type'] = $poll_type;
         if($anonymous) $data['anonymous'] = $anonymous;
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PUT',
             '/meetings/'.$meeting_id.'/polls/'.$poll_id,
             [],
@@ -807,7 +806,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $poll_id,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'DELETE',
             '/meetings/'.$meeting_id.'/polls/'.$poll_id
         );
@@ -829,7 +828,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $meeting_id,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/registrants/questions'
         );
@@ -855,7 +854,7 @@ final class ZoomKitMeetings extends ZoomKit {
         ?array $custom_questions = null
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/meetings/'.$meeting_id.'/registrants/questions',
             [],
@@ -883,7 +882,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $meeting_id
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/invitation'
         );
@@ -912,7 +911,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $page_url
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/meetings/'.$meeting_id.'/livestream',
             [],
@@ -942,7 +941,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $meeting_id
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/livestream'
         );
@@ -969,7 +968,7 @@ final class ZoomKitMeetings extends ZoomKit {
         array $settings
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/meetings/'.$meeting_id.'/livestream/status',
             [],
@@ -1001,7 +1000,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $meeting_id,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/past_meetings/'.$meeting_id.'/polls'
         );
@@ -1029,7 +1028,7 @@ final class ZoomKitMeetings extends ZoomKit {
         array $registrants,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/meetings/'.$meeting_id.'/batch_registrants',
             [],
@@ -1065,7 +1064,8 @@ final class ZoomKitMeetings extends ZoomKit {
     ): array|Exception
     {
         if($method !== 'recording.start' && $method !== 'recording.stop' && $method !== 'recording.pause' && $method !== 'recording.resume') throw new Exception ('Unknown in-meeting recording control method.');
-        return ZoomKit::returnResponse(
+
+        return Response::returnResponse(
             'PATCH',
             '/live_meetings/'.$meeting_id.'/events',
             [],
@@ -1097,7 +1097,7 @@ final class ZoomKitMeetings extends ZoomKit {
         array $polls,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/meetings/'.$meeting_id.'/batch_polls',
             [],
@@ -1124,7 +1124,7 @@ final class ZoomKitMeetings extends ZoomKit {
         string $user_id
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/users/'.$user_id.'/meeting_templates'
         );
@@ -1150,7 +1150,7 @@ final class ZoomKitMeetings extends ZoomKit {
         int $ttl = 7200,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/meetings/'.$meeting_id.'/invite_links',
             [],

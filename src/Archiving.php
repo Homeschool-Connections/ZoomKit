@@ -4,7 +4,7 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitArchiving extends ZoomKit {
+final class Archiving extends Response {
     /**
      * ZoomKit APIs for the Archiving Section of Zoom API
      *
@@ -65,7 +65,7 @@ final class ZoomKitArchiving extends ZoomKit {
         if(!$to) $to = Carbon::today();
         if(!$from) $from = Carbon::today()->subWeek();
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/archive_files',
             [
@@ -95,7 +95,7 @@ final class ZoomKitArchiving extends ZoomKit {
         string $meeting_UUID,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/past_meetings/'.$meeting_UUID.'/archive_files',
         );
@@ -119,7 +119,7 @@ final class ZoomKitArchiving extends ZoomKit {
         string $meeting_UUID
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'DELETE',
             '/past_meetings/'.$meeting_UUID.'/archive_files',
         );

@@ -4,7 +4,7 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitMeetingsExtras extends ZoomKit {
+final class MeetingsExtras extends Response {
     /**
      * ZoomKit Extra APIs for the Meetings Section of Zoom API
      * These APIs are not stock Zoom APIs but are abstractions on them.
@@ -79,7 +79,7 @@ final class ZoomKitMeetingsExtras extends ZoomKit {
         ?string $template_id = null,
     ): array|Exception
     {
-        return ZoomKitMeetings::createMeeting(
+        return Meetings::createMeeting(
             user_id: $user_id,
             topic: $topic,
             agenda: $agenda,
@@ -141,7 +141,7 @@ final class ZoomKitMeetingsExtras extends ZoomKit {
         ?string $template_id = null,
     ): array|Exception
     {
-        return ZoomKitMeetings::createMeeting(
+        return Meetings::createMeeting(
             user_id: $user_id,
             topic: $topic,
             agenda: $agenda,
@@ -170,7 +170,7 @@ final class ZoomKitMeetingsExtras extends ZoomKit {
         int $meeting_id,
     ): array|Exception
     {
-        return ZoomKitMeetings::updateMeetingStatus(
+        return Meetings::updateMeetingStatus(
             meeting_id: $meeting_id,
             action: 'end'
         );

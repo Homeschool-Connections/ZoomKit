@@ -4,7 +4,7 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitContacts extends ZoomKit {
+final class Contacts extends Response {
     /**
      * ZoomKit APIs for the Contacts Section of Zoom API
      *
@@ -68,7 +68,7 @@ final class ZoomKitContacts extends ZoomKit {
                 throw new Exception ('Unsupported page size.');
             }
         }
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/contacts',
             [
@@ -114,7 +114,7 @@ final class ZoomKitContacts extends ZoomKit {
                 throw new Exception ('Unsupported page size.');
             }
         }
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/chat/users/me/contacts',
             [
@@ -147,7 +147,7 @@ final class ZoomKitContacts extends ZoomKit {
         bool $query_presence_status = false
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/chat/users/me/contacts/'.$contact_id,
             [

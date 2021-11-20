@@ -4,9 +4,9 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitZoomRoomsDevices extends ZoomKit {
+final class PAC extends Response {
     /**
-     * ZoomKit APIs for the Zoom Rooms Devices Section of Zoom API
+     * ZoomKit APIs for the Personal Audio Conference Section of Zoom API
      *
      * MIT License
      * Code Copyright (c) 2021 Homeschool Connections
@@ -37,40 +37,27 @@ final class ZoomKitZoomRoomsDevices extends ZoomKit {
      */
 
     /**
-     * PUT /rooms/{roomId}/devices/{deviceId}/app_version
+     * GET /users/{userId}/pac
      *
-     * Use this API to upgrade or downgrade the version of your installed Zoom Rooms app on your Mac or Windows device.
+     * Use this API to list a user’s Personal Audio Conference accounts.
+     * For user-level apps, pass the `me` value instead of the `userId` parameter.
      *
-     * Scopes: room:write:admin
-     * Rate Limit Label: Unspecified
+     * PAC allows Pro or higher account holders to host meetings through PSTN (phone dial-in) only.
      *
-     * The Zoom Rooms software must be installed on a Mac or a Windows device. This API does not support other devices.
+     * Scopes: pac:read:admin, pac:read
+     * Rate Limit Label: Light
      *
-     * This is a weird Zoom API. It's the only function on the Zoom Rooms Devices category.
-     * Come on Zoom - maybe this needs to be reorganized.
-     *
-     * @param string $room_id ID of the Room the device is located in.
-     * @param string $device_id ID of the device, running Windows or macOS.
-     * @param string $action Can be `upgrade`, `downgrade`, or `cancel`.
+     * @param string $user_id The user ID or email address of the user. For user-level apps, pass the `me` value.
      * @return array|Exception
      * @throws Exception
      */
-    public static function changeZoomRoomsAppVersion(
-        string $room_id,
-        string $device_id,
-        string $action
+    public static function listUserPACAccounts(
+        string $user_id
     ): array|Exception
     {
-        if($action !== 'upgrade' && $action !== 'downgrade' && $action !== 'cancel') throw new Exception ('Unsupported Zoom Rooms device action.');
-
-        return ZoomKit::returnResponse(
-            'PUT',
-            '/rooms/'.$room_id.'/devices/'.$device_id.'/app_version',
-            [],
-            [],
-            [
-                'action' => $action
-            ]
+        return Response::returnResponse(
+            'GET',
+            '/users/'.$user_id.'/pac'
         );
     }
 }

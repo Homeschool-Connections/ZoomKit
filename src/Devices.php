@@ -4,7 +4,7 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitDevices extends ZoomKit {
+final class Devices extends Response {
     /**
      * ZoomKit for the Devices Section of Zoom API
      *
@@ -62,7 +62,7 @@ final class ZoomKitDevices extends ZoomKit {
     {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/h323/devices',
             [
@@ -99,7 +99,7 @@ final class ZoomKitDevices extends ZoomKit {
         if($encryption !== 'auto' && $encryption !== 'yes' && $encryption !== 'no') throw new Exception('Unsupported encryption status.');
         if($protocol !== 'H.323' && $protocol !== 'SIP') throw new Exception('Unsupported device protocol.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/h323/devices',
             [],
@@ -153,7 +153,7 @@ final class ZoomKitDevices extends ZoomKit {
         if($ip) $data['ip'] = $ip;
         if($encryption) $data['encryption'] = $encryption;
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/h323/devices/'.$device_id,
             [],
@@ -180,7 +180,7 @@ final class ZoomKitDevices extends ZoomKit {
         string $device_id,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'DELETE',
             '/h323/devices/'.$device_id
         );

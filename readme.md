@@ -12,17 +12,17 @@ Once these environment variables have been added, the APIs are modeled off of Zo
 For example, if you wanted to use the API at [Zoom's Dashboards > List Meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetings), you would do the following:
 
 ```
-use HSC\ZoomKit\ZoomKitDashboards;
+use HSC\ZoomKit\Dashboards;
 
 class MyClass {
-    function list_meetings() {
-        $result = ZoomKitDashboards::listMeetings();
+    function listMeetings() {
+        $result = Dashboards::listMeetings();
         dump($result);
     }
 }
 ```
 
-In the above example, `ZoomKitDashboards` is the class containing all the APIs within the `Dashboards` section of the documentation.
+In the above example, `Dashboards` is the class containing all the APIs within the `Dashboards` section of the documentation.
 All functions are named similarly to their documentation titles, with the "List meetings" article being `listMeetings()`.
 
 Some functions support additional arguments, which is recorded in PHPdoc blocks. Dates use `Carbon` types, similar to other Laravel dates.
@@ -30,14 +30,14 @@ Some functions support additional arguments, which is recorded in PHPdoc blocks.
 A very customized call of the same `listMeetings()` function might look like:
 
 ```
-use HSC\ZoomKit\ZoomKitDashboards;
+use HSC\ZoomKit\Dashboards;
 
 class MyClass {
     function list_meetings() {
         $from = Carbon::now()->subMonth();
         $to = Carbon::now();
         
-        $result = ZoomKitDashboards::listMeetings(
+        $result = Dashboards::listMeetings(
             type: 'pastOne',
             from: $from,
             to: $to,
@@ -51,12 +51,12 @@ class MyClass {
 
 ### Currently implemented functions
 
-#### `ZoomKitArchiving` class
+#### `Archiving` class
 - `listArchivedFiles()` - [List archived files](https://marketplace.zoom.us/docs/api-reference/zoom-api/archiving/listarchivedfiles)
 - `getMeetingArchivedFiles()` - [Get meeting archived files](https://marketplace.zoom.us/docs/api-reference/zoom-api/archiving/testgetrecordarchivedfiles)
 - `deleteMeetingArchivedFiles()` - [Delete meeting archived files](https://marketplace.zoom.us/docs/api-reference/zoom-api/archiving/deleterecordarchivedfiles)
 
-#### `ZoomKitCloudRecordings` class
+#### `CloudRecordings` class
 - `listAllRecordings()` - [List all recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingslist)
 - `getMeetingRecordings()` - [Get meeting recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingget)
 - `deleteMeetingRecordings()` - [Delete meeting recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingdelete)
@@ -72,12 +72,12 @@ class MyClass {
 - `updateRegistrationQuestions()` - [Update registration questions](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/recordingregistrantquestionupdate)
 - `listAccountRecordings()` - [List account recordings](https://marketplace.zoom.us/docs/api-reference/zoom-api/cloud-recording/getaccountcloudrecording)
 
-#### `ZoomKitContacts` class
+#### `Contacts` class
 - `searchCompanyContacts()` - [Search company contacts](https://marketplace.zoom.us/docs/api-reference/zoom-api/contacts/searchcompanycontacts)
 - `listUserContacts()` - [List user contacts](https://marketplace.zoom.us/docs/api-reference/zoom-api/contacts/getusercontacts)
 - `getUserContactDetails()` - [Get user contact details](https://marketplace.zoom.us/docs/api-reference/zoom-api/contacts/getusercontact)
 
-#### `ZoomKitDashboards` class
+#### `Dashboards` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetings)
 - `getMeetingDetails()` - [Get meeting details](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetingdetail)
 - `listMeetingParticipants()` - [List meeting participants](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/dashboardmeetingparticipants)
@@ -104,13 +104,13 @@ class MyClass {
 - `getPostMeetingFeedback()` - [Get post meeting feedback](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/participantfeedback)
 - `getPostWebinarFeedback()` - [Get post webinar feedback](https://marketplace.zoom.us/docs/api-reference/zoom-api/dashboards/participantwebinarfeedback)
 
-#### `ZoomKitDevices` class
+#### `Devices` class
 - `listH323SIPDevices()` - [List H.323/SIP devices](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/devicelist)
 - `createH323SIPDevice()` - [Create a H.323/SIP device](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/devicecreate)
 - `updateH323SIPDevice()` - [Update a H.323/SIP device](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/deviceupdate)
 - `deleteH323SIPDevice()` - [Delete a H.323/SIP device](https://marketplace.zoom.us/docs/api-reference/zoom-api/devices/devicedelete)
 
-#### `ZoomKitMeetings` class
+#### `Meetings` class
 - `listMeetings()` - [List meetings](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings)
 - `getMeeting()` - [Get a meeting](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meeting)
 - `createMeeting()` - [Create a meeting](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate)
@@ -143,27 +143,27 @@ class MyClass {
 - `listMeetingTemplates()` - [List meeting templates](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/listmeetingtemplates)
 - `createMeetingInviteLinks()` - [Create meeting's invite links](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetinginvitelinkscreate)
 
-##### `ZoomKitMeetingsExtras` class
+##### `MeetingsExtras` class
 Expands the `ZoomKitMeetings` class with ZoomKit-exclusive API abstractions that simplify the use of some of Zoom's more complex APIs.
 - `createInstantMeeting()` - Simplified call of `ZoomKitMeetings::createMeeting()` specific to Instant Meetings
 - `createScheduledMeeting()` - Simplified call of `ZoomKitMeetings::createMeeting()` specific to Scheduled Meetings
 - `endMeeting()` - Simplified call of `ZoomKitMeeting::updateMeetingStatus()` to simply end a meeting.
 
-#### `ZoomKitPAC` class
+#### `PAC` class
 Zoom's smallest API section (tied with the Zoom Rooms Devices section) with only one function.
 - `listUserPACAccounts()` - [List a user's PAC accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/pac/userpacs)
 
-#### `ZoomKitReports` class
+#### `Reports` class
 - `getDailyUsageReport()` - [Get daily usage report](https://marketplace.zoom.us/docs/api-reference/zoom-api/reports/reportdaily)
 - `getActiveInactiveHostReports()` - [Get active/inactive host reports](https://marketplace.zoom.us/docs/api-reference/zoom-api/reports/reportusers)
 
-#### `ZoomKitZoomRoomsAccount` class
+#### `RoomsAccount` class
 - `getZoomRoomAccountProfile()` - [Get Zoom Room account profile](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/getzraccountprofile)
 - `updateZoomRoomAccountProfile()` - [Update Zoom Room account profile](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/updatezraccprofile)
 - `getZoomRoomAccountSettings()` - [Get Zoom Room account settings](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/getzraccountsettings)
 - `updateZoomRoomAccountSettings()` - [Update Zoom Room account settings](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-account/updatezoomroomaccsettings)
 
-#### `ZoomKitZoomRoomsDevices` class
+#### `RoomsDevices` class
 - `changeZoomRoomsAppVersion()` - [Change Zoom Rooms app version](https://marketplace.zoom.us/docs/api-reference/zoom-api/zoom-rooms-devices/changezoomroomsappversion)
 
 ### Zoom API Sections

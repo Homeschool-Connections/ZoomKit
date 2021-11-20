@@ -4,7 +4,7 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitCloudRecordings extends ZoomKit {
+final class CloudRecordings extends Response {
     /**
      * ZoomKit APIs for the Cloud Recordings Section of Zoom API
      *
@@ -77,7 +77,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
 
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/users/'.$user_id.'/recordings',
             [
@@ -121,7 +121,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
             if($ttl > 604800) throw new Exception ('TTL larger than acceptable maximum of 604800.');
         }
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/recordings',
             [
@@ -151,7 +151,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
     {
         if($action !== 'trash' && $action !== 'delete') throw new Exception ('Unsupported delete action.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'DELETE',
             '/meetings/'.$meeting_id.'/recordings',
             [
@@ -185,7 +185,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
     {
         if($action !== 'trash' && $action !== 'delete') throw new Exception ('Unsupported delete action.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'DELETE',
             '/meetings/'.$meeting_id.'/recordings/'.$recording_id,
             [
@@ -214,7 +214,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         string $meeting_id,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PUT',
             '/meetings/'.$meeting_id.'/recordings/status',
             [],
@@ -246,7 +246,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         string $recording_id
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PUT',
             '/meetings/'.$meeting_id.'/recordings/'.$recording_id.'/status',
             [],
@@ -273,7 +273,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         string $meeting_id
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/recordings/settings',
         );
@@ -333,7 +333,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         if($show_social_share_buttons) $data['show_social_share_buttons'] = $show_social_share_buttons;
         if($topic) $data['topic'] = $topic;
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/meetings/'.$meeting_id.'/recordings/settings',
             [],
@@ -369,7 +369,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
     {
         if($status !== 'pending' && $status !== 'approved' && $status !== 'denied') throw new Exception ('Unsupported status type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/recordings/registrants',
             [
@@ -456,7 +456,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         if($comments) $data['comments'] = $comments;
         if($custom_questions) $data['custom_questions'] = $custom_questions;
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'POST',
             '/meetings/'.$meeting_id.'/recordings/registrants',
             [],
@@ -492,7 +492,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
     {
         if($action !== 'approve' && $action !== 'deny') throw new Exception ('Unsupported action.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PUT',
             '/meetings/'.$meeting_id.'/recordings/registrants/status',
             [],
@@ -521,7 +521,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         string $meeting_id
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/meetings/'.$meeting_id.'/recordings/registrants/questions',
         );
@@ -548,7 +548,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         ?array $custom_questions = null
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/meetings/'.$meeting_id.'/recordings/registrants/questions',
             [],
@@ -591,7 +591,7 @@ final class ZoomKitCloudRecordings extends ZoomKit {
         ?string $next_page_token = null
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/accounts/'.$account_id.'/recordings',
             [

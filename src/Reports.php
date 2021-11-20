@@ -4,7 +4,7 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitReports extends ZoomKit
+final class Reports extends Response
 {
     /**
      * ZoomKit APIs for the Reports Section of Zoom API
@@ -57,7 +57,7 @@ final class ZoomKitReports extends ZoomKit
     {
         if($month < 1 || $month > 12) throw new Exception ('Invalid month.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/report/daily',
             [
@@ -91,6 +91,7 @@ final class ZoomKitReports extends ZoomKit
      * @param int|null $page_size The number of records returned from the call. Min 30, Max 300, Default 30.
      * @param string|null $next_page_token Used for paginating through results. Expires in 15 minutes.
      * @return array|Exception
+     * @throws Exception
      */
     public static function getActiveInactiveHostReports(
         string $type,
@@ -100,7 +101,7 @@ final class ZoomKitReports extends ZoomKit
         ?string $next_page_token = null,
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/report/users',
             [

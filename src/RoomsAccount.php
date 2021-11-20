@@ -4,7 +4,7 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitZoomRoomsAccount extends ZoomKit {
+final class RoomsAccount extends Response {
     /**
      * ZoomKit APIs for the Zoom Rooms Accounts Section of Zoom API
      *
@@ -55,7 +55,7 @@ final class ZoomKitZoomRoomsAccount extends ZoomKit {
         // This API, surprisingly, has no documented parameters.
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/rooms/account_profile'
         );
@@ -100,7 +100,7 @@ final class ZoomKitZoomRoomsAccount extends ZoomKit {
         if($room_passcode) $data['room_passcode'] = $room_passcode;
         if($required_code_to_ext) $data['required_code_to_ext'] = $required_code_to_ext;
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/rooms/account_profile',
             [],
@@ -132,7 +132,7 @@ final class ZoomKitZoomRoomsAccount extends ZoomKit {
     {
         if($setting_type !== 'meeting' && $setting_type !== 'alert' && $setting_type !== 'signage') throw new Exception ('Unsupported type of setting to retrieve.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/rooms/account_settings',
             [
@@ -163,7 +163,7 @@ final class ZoomKitZoomRoomsAccount extends ZoomKit {
         array $data
     ): array|Exception
     {
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'PATCH',
             '/rooms/account_settings',
             [

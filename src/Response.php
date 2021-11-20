@@ -3,7 +3,7 @@
 namespace HSC\ZoomKit;
 use Exception;
 
-class ZoomKit extends ZoomAPIWrapper {
+class Response extends APIWrapper {
 
     /**
      * ZoomKit Main Class
@@ -44,7 +44,7 @@ class ZoomKit extends ZoomAPIWrapper {
         array $pathParams = [],
         string|array $body = ''
     ): array|Exception {
-        $zoom = new ZoomAPIWrapper(env('ZOOM_KEY'), env('ZOOM_SECRET'));
+        $zoom = new APIWrapper(env('ZOOM_KEY'), env('ZOOM_SECRET'));
         $response = $zoom->doRequest(
             $method,
             $path,

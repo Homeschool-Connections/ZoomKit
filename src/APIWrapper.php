@@ -2,7 +2,7 @@
 
 namespace HSC\ZoomKit;
 
-class ZoomAPIWrapper {
+class APIWrapper {
     /**
      * Zoom API Wrapper
      *

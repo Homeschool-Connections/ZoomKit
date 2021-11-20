@@ -4,7 +4,7 @@ namespace HSC\ZoomKit;
 use Carbon\Carbon;
 use Exception;
 
-final class ZoomKitDashboards extends ZoomKit {
+final class Dashboards extends Response {
 
     /**
      * ZoomKit for the Dashboards Section of Zoom API
@@ -73,7 +73,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
         $include_fields = ($tracking_fields ? 'tracking_fields' : '');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/meetings',
             [
@@ -112,7 +112,7 @@ final class ZoomKitDashboards extends ZoomKit {
     {
         if($type !== 'live' && $type !== 'pastOne' && $type !== 'past') throw new Exception('Invalid meeting type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/meetings/'.$meeting_id,
             [
@@ -152,7 +152,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
         $include_fields = ($registrant_id ? 'registrant_id' : '');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/meetings/'.$meeting_id.'/participants',
             [
@@ -199,7 +199,7 @@ final class ZoomKitDashboards extends ZoomKit {
     {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid meeting type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/meetings/'.$meeting_id.'/participants/'.$participant_id.'/qos',
             [
@@ -239,7 +239,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid meeting type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/meetings/'.$meeting_id.'/participants/qos',
             [
@@ -274,7 +274,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid meeting type.');
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/meetings/'.$meeting_id.'/participants/sharing',
             [
@@ -314,7 +314,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/webinars',
             [
@@ -347,7 +347,7 @@ final class ZoomKitDashboards extends ZoomKit {
     {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/webinars/'.$webinar_id,
             [
@@ -390,7 +390,7 @@ final class ZoomKitDashboards extends ZoomKit {
         $include_fields = ($registrant_id ? 'registrant_id' : '');
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/webinars/'.$webinar_id.'/participants',
             [
@@ -438,7 +438,7 @@ final class ZoomKitDashboards extends ZoomKit {
     {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/webinars/'.$webinar_id.'/participants/'.$participant_id.'/qos',
             [
@@ -478,7 +478,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/webinars/'.$webinar_id.'/participants/qos',
             [
@@ -513,7 +513,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/webinars/'.$webinar_id.'/participants/sharing',
             [
@@ -545,7 +545,7 @@ final class ZoomKitDashboards extends ZoomKit {
     {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/zoomrooms',
             [
@@ -584,7 +584,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$to) $to = Carbon::now();
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/zoomrooms/'.$zoom_room_id,
             [
@@ -621,7 +621,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$from) $from = Carbon::now()->subDay();
         if(!$to) $to = Carbon::now();
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/crc',
             [
@@ -684,7 +684,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$to) $to = Carbon::now();
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/chat',
             [
@@ -721,7 +721,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$from) $from = Carbon::now()->subDay();
         if(!$to) $to = Carbon::now();
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/client/feedback',
             [
@@ -752,7 +752,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$from) $from = Carbon::now()->subDay();
         if(!$to) $to = Carbon::now();
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/zoomrooms/issues',
             [
@@ -784,7 +784,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$from) $from = Carbon::now()->subDay();
         if(!$to) $to = Carbon::now();
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/issues/zoomrooms',
             [
@@ -823,7 +823,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$to) $to = Carbon::now();
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/issues/zoomrooms/'.$zoom_room_id,
             [
@@ -861,7 +861,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$to) $to = Carbon::now();
         if($type !== 'meeting' && $type !== 'participants') throw new Exception('Invalid meeting score type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/quality',
             [
@@ -901,7 +901,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$to) $to = Carbon::now();
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/client/feedback/'.$feedback_id,
             [
@@ -939,7 +939,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if(!$from) $from = Carbon::now()->subDay();
         if(!$to) $to = Carbon::now();
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/client/satisfaction',
             [
@@ -976,7 +976,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
         if($type !== 'live' && $type !== 'past' && $type !== 'pastOne') throw new Exception('Invalid webinar type.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/meetings/'.$meeting_id.'/participants/satisfaction',
             [
@@ -1017,7 +1017,7 @@ final class ZoomKitDashboards extends ZoomKit {
         if($type !== 'live' && $type !== 'past') throw new Exception('Invalid webinar type.');
         if($page_size < 30 || $page_size > 300) throw new Exception('Page size is minimum 30, maximum 300 results.');
 
-        return ZoomKit::returnResponse(
+        return Response::returnResponse(
             'GET',
             '/metrics/webinars/'.$webinar_id.'/participants/satisfaction',
             [
